@@ -5,7 +5,7 @@
                 dark
                 padless
                 absolut
-                fixed
+                
                 
                 >
                 <v-card

@@ -1,6 +1,6 @@
 <template>
   <div class="header" >
-    <v-toolbar fixed dense color="#EEEEEE" >
+    <v-toolbar  dense color="#EEEEEE" >
         <div class="hidden-sm-and-up">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
         </div>
