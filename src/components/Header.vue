@@ -13,6 +13,7 @@
 
         <v-toolbar-items class="hidden-sm-and-down" >
           <v-btn text ><router-link to="/">Home</router-link></v-btn>
+          <v-btn text ><router-link to="/allevents">All Events</router-link></v-btn>
           <v-btn text ><router-link to="/about">About</router-link></v-btn>
           <v-btn text ><router-link to="/signin">Login</router-link></v-btn>
         </v-toolbar-items>    
@@ -66,8 +67,10 @@ export default {
       return {
         drawer: null,
         items: [
-          { icon: 'dashboard', title: 'Home',  route: '/' },
+          { icon: 'mdi-home', title: 'Home',  route: '/' },
+          { icon: 'mdi-eventbrite', title: 'All Events', route: 'allevents'},
           { icon: 'question_answer', title: 'About', route: '/about' },
+          { icon: 'mdi-login', title: 'SignIn', route: '/signin' },
         ],
       }
     },
