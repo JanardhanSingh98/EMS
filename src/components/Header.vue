@@ -47,7 +47,7 @@
           router :to="item.route"
           >
           <v-list-item-icon>
-              <v-icon to="/">{{ item.icon }}</v-icon>
+              <v-icon >{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
