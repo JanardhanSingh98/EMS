@@ -12,7 +12,7 @@
         <div class="flex-grow-1"></div>
 
         <v-toolbar-items class="hidden-sm-and-down" >
-          <v-btn text ><router-link to="/">Home</router-link></v-btn>
+          <v-btn text ><router-link to="/">Homeee</router-link></v-btn>
           <v-btn text ><router-link to="/allevents">All Events</router-link></v-btn>
           <v-btn text ><router-link to="/about">About</router-link></v-btn>
           <v-btn text ><router-link to="/signin">Login</router-link></v-btn>
@@ -24,7 +24,7 @@
       v-model="drawer"
       absolute
       temporary
-      height="950px"
+      height="1000px"
       >
       <v-list-item>
           <v-list-item-avatar>
