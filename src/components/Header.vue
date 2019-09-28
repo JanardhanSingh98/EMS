@@ -1,30 +1,24 @@
 <template>
   <div class="header" >
-    <v-toolbar app  dense  fixed>
-        <div class="hidden-sm-and-up">
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
-        </div>
+    <v-app-bar app dense >
         
-        <v-toolbar-title>EMS</v-toolbar-title>
+        <v-app-bar-nav-icon class="d-flex d-sm-none d-md-none" @click="drawer = !drawer" ></v-app-bar-nav-icon>
+        
+        <v-app-bar-title>EMS</v-app-bar-title>
 
         <v-spacer></v-spacer>
         
-        <div class="flex-grow-1"></div>
-
-        <v-toolbar-items class="hidden-sm-and-down" >
-          <v-btn text ><router-link to="/">Homeee</router-link></v-btn>
-          <v-btn text ><router-link to="/allevents">All Events</router-link></v-btn>
-          <v-btn text ><router-link to="/about">About</router-link></v-btn>
-          <v-btn text ><router-link to="/signin">Login</router-link></v-btn>
-        </v-toolbar-items>    
-    </v-toolbar>
+        <v-app-bar-items class="d-none d-sm-flex">
+          <v-btn text v-for="(navItem, i) in navItems" :key="i" link :to="navItem.route">{{ navItem.text }}</v-btn>
+        </v-app-bar-items> 
+    </v-app-bar>
 
     <v-navigation-drawer
       app
       v-model="drawer"
-      absolute
-      temporary
-      height="1000px"
+      nav
+      dense
+      
       >
       <v-list-item>
           <v-list-item-avatar>
@@ -65,10 +59,16 @@ export default {
     name: 'header',
     data () {
       return {
-        drawer: null,
+        navItems: [
+          { text: 'Home', route: '/' },
+          { text: 'All Events', route: '/allevents'},
+          { text: 'About', route: '/about' },
+          { text: 'SignIn', route: '/signin' },
+        ],
+        drawer: false,
         items: [
           { icon: 'mdi-home', title: 'Home',  route: '/' },
-          { icon: 'mdi-eventbrite', title: 'All Events', route: 'allevents'},
+          { icon: 'mdi-eventbrite', title: 'All Events', route: '/allevents'},
           { icon: 'question_answer', title: 'About', route: '/about' },
           { icon: 'mdi-login', title: 'SignIn', route: '/signin' },
         ],
@@ -78,5 +78,7 @@ export default {
 </script>
 
 <style scoped>
-
+.header {
+  position: relative;
+}
 </style>

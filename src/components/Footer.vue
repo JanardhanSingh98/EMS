@@ -2,6 +2,7 @@
   <v-footer
     color="primary lighten-1 elevation-10"
     padless
+    class="d-none d-sm-flex"
   >
     <v-row
       justify="center"
