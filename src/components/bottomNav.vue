@@ -1,6 +1,6 @@
 <template>
    <v-bottom-navigation :value="activeBtn" color="blue accent-2" class="d-flex d-sm-none" vertical fixed>
-       <v-btn icon v-for="(bottom, i) in bottoms" :key="i" link :to="bottom.route">
+       <v-btn icon v-for="(bottom, i) in bottoms" :key="i" link :to="bottom.route" >
            
            <span>{{ bottom.title }}</span>
            <v-icon medium>{{ bottom.icon }}</v-icon>
