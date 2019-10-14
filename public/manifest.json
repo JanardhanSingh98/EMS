@@ -1,6 +1,6 @@
 {
-  "name": "ems",
-  "short_name": "ems",
+  "name": "Event Management System",
+  "short_name": "Ems",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

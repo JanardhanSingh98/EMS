@@ -1,8 +1,8 @@
 <template>
   <div class="header" >
-    <v-app-bar app dense >
+    <v-app-bar app  >
         
-        <v-app-bar-nav-icon class="d-flex d-sm-none d-md-none" @click="drawer = !drawer" ></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon class="d-flex d-sm-none " @click="drawer = !drawer" ></v-app-bar-nav-icon>
         
         <v-app-bar-title>EMS</v-app-bar-title>
 
@@ -22,9 +22,7 @@
     <v-navigation-drawer
       app
       v-model="drawer"
-      nav
-      dense
-      
+      fixed
       >
       <v-list-item>
           <v-list-item-avatar>
@@ -38,7 +36,7 @@
 
       <v-divider></v-divider>
 
-      <v-list dense>
+      <v-list >
 
           <v-list-item
           v-for="item in items"
