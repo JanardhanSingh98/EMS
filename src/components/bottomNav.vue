@@ -1,26 +1,38 @@
 <template>
-   <v-bottom-navigation :value="activeBtn" color="blue accent-2" class="d-flex d-sm-none" vertical fixed>
-       <v-btn icon v-for="(bottom, i) in bottoms" :key="i" link :to="bottom.route" >
-           
-           <span>{{ bottom.title }}</span>
-           <v-icon medium>{{ bottom.icon }}</v-icon>
-       </v-btn>
-    </v-bottom-navigation>     
+    <v-bottom-navigation
+    class="d-flex d-sm-none"
+    :value="activeBtn"
+    grow
+    app
+    color="blue accent-2"
+    >
+        <v-btn router-link to="/">
+        <span>Home</span>
+        <v-icon>mdi-home</v-icon>
+        </v-btn>
+
+        <v-btn router-link to="/allevents">
+        <span>All Events</span>
+        <v-icon>mdi-eventbrite</v-icon>
+        </v-btn>
+
+        <v-btn router-link to="/about">
+        <span>About</span>
+        <v-icon>question_answer</v-icon>
+        </v-btn>
+
+        <v-btn router-link to="/signin">
+        <span>SignIn</span>
+        <v-icon>mdi-login</v-icon>
+        </v-btn>
+    </v-bottom-navigation>
 </template>
 
 <script>
 export default {
-    
     data () {
         return {
-            activeBtn: 1,
-            bottoms: [
-                { icon: 'mdi-home', title: 'Home',  route: '/' },
-                { icon: 'mdi-eventbrite', title: 'All Events', route: '/allevents'},
-                { icon: 'question_answer', title: 'About', route: '/about' },
-                { icon: 'mdi-login', title: 'SignIn', route: '/signin' },
-                
-            ]
+            activeBtn: 0,
         }
     }
 };
