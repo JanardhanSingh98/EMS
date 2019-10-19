@@ -1,9 +1,9 @@
 <template>
-  <div >
+  <v-content>
     <Carousel/>
     <Categories/>
     <FeatureEvents/>
-  </div>
+  </v-content>
   
   
 </template>
@@ -23,7 +23,5 @@ export default {
 </script>
 
 <style  scoped>
-#id1{
-  padding:5px 20px;
-}
+
 </style>

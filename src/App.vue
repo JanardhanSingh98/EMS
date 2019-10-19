@@ -1,11 +1,9 @@
 <template>
-  <v-app>
+  <v-app class="app">
     <Header/>
     <v-content>
       <router-view/>
     </v-content>
-    
-    
     <Footer/>
     <bottomNav/>
   </v-app>
@@ -24,3 +22,7 @@ export default {
   }),
 };
 </script>
+
+<style >
+
+</style>

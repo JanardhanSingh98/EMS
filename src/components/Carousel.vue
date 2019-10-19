@@ -1,7 +1,8 @@
 <template>
-  <v-carousel
+  <div class="crousel">
+    <v-carousel
     cycle
-    height="400"
+    height="450"
     hide-delimiter-background
     show-arrows-on-hover
     fixed
@@ -24,11 +25,15 @@
       </v-sheet>
     </v-carousel-item>
   </v-carousel>
+  </div>
 </template>
 
 <script>
   export default {
       name: 'carousel',
+      components: {
+
+      },
         data () {
         return {
             colors: [

@@ -4,6 +4,7 @@
     :value="activeBtn"
     grow
     app
+    shift
     color="blue accent-2"
     >
         <v-btn router-link to="/">

@@ -43,22 +43,7 @@ def beforeeach():
 
 # import socketchat; #Import the file which you want to make it to listen events on
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import json
-
 @application.route('/submitlogin',methods=['POST'])
 def this_is_the_root():
     data=json.loads(request.data.decode('utf-8'));
@@ -68,27 +53,12 @@ def this_is_the_root():
     import database
     cn=database.openconnection(databasename='ems')
     cursor=cn.cursor()
-
     cursor.execute("insert into login values(\'{}\',\'{}\')".format(username,password))
-
     cn.commit()
-
     return json.dumps({'login':'success'})
-
-
-
-
-
 
 @application.route('/submitlogin',methods=['GET'])
 def ad():
-
-
-
-
-
-
-
     return json.dumps()
 
 

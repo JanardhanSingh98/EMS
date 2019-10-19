@@ -33,3 +33,4 @@ Vue.use(VueFilterDateFormat, {
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
   ]
 });
+
