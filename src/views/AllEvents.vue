@@ -5,7 +5,7 @@
                 <v-content 
                 class="d-flex pa-2 text-center"
                 >
-                    <v-btn @click="setFilter()" class="ma-2" outlined color="indigo">All</v-btn>
+                    <v-btn @click="projects.cate" class="ma-2" outlined color="indigo">All</v-btn>
                     <v-btn @click="setFilter('Adventure')" class="ma-2" outlined color="indigo">Adventure</v-btn>
                     <v-btn @click="setFilter('Creative')" class="ma-2" outlined color="indigo">Creative</v-btn>
                     <v-btn @click="setFilter('Entertainment')" class="ma-2" outlined color="indigo">Entertainment</v-btn>
@@ -29,6 +29,32 @@
                 </v-content>
             </v-row>
         </div >
+
+        <div class="ma-2">
+            <v-row class="ma-3">
+                <v-col cols="40" sm="6" md="2" class="">
+                    <v-menu
+                    v-model="menu2"
+                    :close-on-content-click="true"
+                    :nudge-right="30"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="290px"
+                    >
+                    <template v-slot:activator="{ on }">
+                        <v-text-field
+                        v-model="date"
+                        label="Date"
+                        prepend-icon="event"
+                        readonly
+                        v-on="on"
+                        ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                    </v-menu>
+                </v-col>
+            </v-row>
+        </div>
 
         <v-row class="justify-center ma-6" >
             <v-content
@@ -100,6 +126,10 @@ export default {
   components: {
     
   },
+  data: () => ({
+      date: new Date().toISOString().substr(0, 10),
+      menu2: false,
+    }),
   data() {
         return {
             projects: [
@@ -127,6 +157,9 @@ export default {
         setFilter(filterName) {
             this.filter = filterName
         },
+        onChange(date, dateString) {
+        console.log(date, dateString);
+      },
     },
 }
 
