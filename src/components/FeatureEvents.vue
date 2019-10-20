@@ -6,8 +6,6 @@
             </v-content>
         </div>
         
-        
-
         <v-row class="justify-center ma-3" >
             <v-content
             v-for="project in projects"

@@ -5,15 +5,33 @@
                 <v-content 
                 class="d-flex pa-2 text-center"
                 >
-                    <v-btn @click="projects.cate" class="ma-2" outlined color="indigo">All</v-btn>
-                    <v-btn @click="setFilter('Adventure')" class="ma-2" outlined color="indigo">Adventure</v-btn>
-                    <v-btn @click="setFilter('Creative')" class="ma-2" outlined color="indigo">Creative</v-btn>
-                    <v-btn @click="setFilter('Entertainment')" class="ma-2" outlined color="indigo">Entertainment</v-btn>
-                    <v-btn @click="setFilter('Startups')" class="ma-2" outlined color="indigo">Startups</v-btn>
-                    <v-btn @click="setFilter('Gaming')" class="ma-2" outlined color="indigo">Gaming </v-btn>
-                    <v-btn @click="setFilter('Technical')" class="ma-2" outlined color="indigo">Technical</v-btn>
-                    <v-btn @click="setFilter('Sports')" class="ma-2" outlined color="indigo">Sports</v-btn>
-                    <v-btn @click="setFilter('Music')" class="ma-2" outlined color="indigo">Music</v-btn>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="color = !color" :elevation="hover ? 20 : 4" outlined color="indigo">All</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Adventure')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Adventure</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Creative')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Creative</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Entertainment')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Entertainment</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Startups')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Startups</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Gaming')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Gaming </v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Technical')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Technical</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Sports')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Sports</v-btn>
+                    </v-hover>
+                    <v-hover v-slot:default="{ hover }">
+                    <v-btn @click="setFilter('Music')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Music</v-btn>
+                    </v-hover>
                 </v-content>
             </v-row>
         </div>
@@ -22,17 +40,25 @@
             <v-row class="text-center ma-3">
                 <v-content 
                 class="d-flex pa-2 text-center">
-                    <v-btn class="ma-2" outlined color="indigo" >All</v-btn>
-                    <v-btn class="ma-2" outlined color="indigo">Today</v-btn>
-                    <v-btn class="ma-2" outlined color="indigo">Tomorrow</v-btn>
-                    <v-btn class="ma-2" outlined color="indigo">Weekend</v-btn>
+                <v-hover v-slot:default="{ hover }">
+                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >All</v-btn>
+                </v-hover>
+                 <v-hover v-slot:default="{ hover }">
+                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Today</v-btn>
+                </v-hover>
+                <v-hover v-slot:default="{ hover }">
+                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Tomorrow</v-btn>
+                </v-hover>
+                <v-hover v-slot:default="{ hover }">
+                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Weekend</v-btn>
+                </v-hover>                  
                 </v-content>
             </v-row>
         </div >
 
         <div class="ma-2">
-            <v-row class="ma-3">
-                <v-col cols="40" sm="6" md="2" class="">
+            <v-row class="ma-3" >
+                <v-col cols="40" sm="6" md="2"  class="">
                     <v-menu
                     v-model="menu2"
                     :close-on-content-click="true"
@@ -50,7 +76,9 @@
                         v-on="on"
                         ></v-text-field>
                     </template>
-                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                    <v-date-picker v-model="date" @input="menu2 = false"
+                    
+                    ></v-date-picker>
                     </v-menu>
                 </v-col>
             </v-row>
@@ -62,12 +90,13 @@
             :key="project"
             class="pa-3" 
             v-if=" filter === project.cate || filter === 'ALL'"
+            
             >
                 <v-hover v-slot:default="{ hover }">
                     <v-card
                     class="ma-auto "
                     max-width="400"
-                    :elevation="hover ? 24 : 8"
+                    :elevation="hover ? 24 : 4"
                     >
                         <v-img
                         class="white--text"
@@ -120,38 +149,39 @@
 
 
 export default {
-
     
-  name: 'allevents',
-  components: {
+    name: 'allevents',
+    components: {
     
   },
   data: () => ({
       date: new Date().toISOString().substr(0, 10),
-      menu2: false,
+      menu2: true,
     }),
   data() {
         return {
             projects: [
-                { cate: 'Technical', title: 'Top 10 Australian beaches', date: 'November 10', name: 'Whitehaven Beach', place: 'Whitsunday Island, Whitsunday Islands', sorce: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'},
-                { cate: 'Sports', title: 'Top 10 Australian beaches', date: 'November 21', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-                { cate: 'Music', title: 'Top 10 Australian beaches', date: 'December 22', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-                { cate: 'Creative', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-                { cate: 'Sports', title: 'Top 10 Australian beaches', date: 'November 25', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-                { cate: 'Music', title: 'Top 10 Australian beaches', date: 'November 22', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-                { cate: 'Adventure', title: 'Top 10 Australian beaches', date: 'November 12', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-                { cate: 'Sports', title: 'Top 10 Australian beaches', date: 'December 23', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-                { cate: 'Music', title: 'Top 10 Australian beaches', date: 'November 17', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-                { cate: 'Adventure', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-                { cate: 'Sports', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-                { cate: 'Music', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-                { cate: 'Creative', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-                { cate: 'Sports', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-                { cate: 'Music', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-                { cate: 'Creative', title: 'Top 10 Australian beaches', date: 'November 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+                { cate: 'Technical', title: 'Top 10 Australian beaches', date: '2019-10-25', name: 'Whitehaven Beach', place: 'Whitsunday Island, Whitsunday Islands', sorce: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'},
+                { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-11-5', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                { cate: 'Music', title: 'Top 10 Australian beaches', date: '2020-01-7', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2019-11-3', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+                { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-10-20', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-11-5', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                { cate: 'Adventure', title: 'Top 10 Australian beaches', date: '2019-12-14', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+                { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2020-03-12', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-11-9', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                { cate: 'Adventure', title: 'Top 10 Australian beaches', date: '2019-10-26', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+                { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-09-21', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-08-15', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2019-11-11', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+                { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-11-17', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-12-04', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2020-05-05', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
             ],
-            filter: 'ALL'
+            filter: 'ALL',
+            
         }
+        clicked: false
     },
     methods: {
         setFilter(filterName) {
@@ -164,3 +194,7 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+</style>
