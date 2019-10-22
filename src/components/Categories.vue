@@ -5,6 +5,8 @@
                 <h2>Browse Categories</h2>
             </v-content>
         </div>
+
+        
     </div>
 </template>
 
