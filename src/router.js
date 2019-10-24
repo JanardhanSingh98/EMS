@@ -7,14 +7,12 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        selector: to.hash
-        // , offset: { x: 0, y: 10 }
-      }
-    }
-  }
-  ,
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 })
+      }, 500)
+    })
+  },
   routes: [
     
     {
