@@ -1,13 +1,27 @@
 <template>
-  <HelloWorld />
+  <div class="home">
+    <Carousel/>
+    <Categories/>
+    <FeatureEvents/>
+  </div>
+  
+  
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
+import Carousel from '../components/Carousel'
+import Categories from '../components/Categories'
+import FeatureEvents from '../components/FeatureEvents'
 
 export default {
   components: {
-    HelloWorld,
+    Carousel,
+    Categories,
+    FeatureEvents
   },
 };
 </script>
+
+<style  scoped>
+
+</style>
