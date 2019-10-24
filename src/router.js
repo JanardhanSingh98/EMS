@@ -6,10 +6,6 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
-  }
-  ,
   routes: [
     
     {
@@ -36,5 +32,8 @@ export default new Router({
       component: () => import('./views/SignIn.vue')
     }
   ],
-  
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
+  ,
 })
