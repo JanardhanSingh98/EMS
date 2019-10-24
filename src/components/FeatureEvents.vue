@@ -9,30 +9,33 @@
         <v-row class="justify-center ma-3" >
             <v-content
             v-for="project in projects"
-            :key="project"
-            class="pa-3" 
-            >
+            :key="project.title"
+            class="pa-3 " >
                 <v-hover v-slot:default="{ hover }">
                     <v-card
-                    class="ma-auto "
+                    class="mx-auto "
                     max-width="400"
-                    :elevation="hover ? 24 : 4"
+                    :elevation="hover ? 20 : 8"
                     >
                         <v-img
                         class="white--text"
                         max-height="200px"
                         :src="project.sorce"
                         >
+                            
                             <div align="right">
                                 <v-chip
                                 class="ma-2 text-uppercase font-weight-bold"
                                 color="primary"
                                 label
+                                    
                                 >
                                     {{project.cate}}
                                 </v-chip>
                             </div>
+
                             <v-card-title class="align-center fill-height" >{{ project.title }}</v-card-title>
+                        
                         </v-img>
 
                         <v-card-text>
@@ -47,6 +50,8 @@
                             <v-btn
                                 text
                                 color="orange"
+                                @click="next"
+                                
                             >
                                 Share
                             </v-btn>
@@ -66,14 +71,21 @@
 
 <script>
 export default {
-    data: () => ({
-        projects: [
-            {cate: 'Technical', title: 'Top 10 Australian beaches', date: 'Number 10', name: 'Whitehaven Beach', place: 'Whitsunday Island, Whitsunday Islands', sorce: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'},
-            {cate: 'Sports', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            {cate: 'Music', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            {cate: 'Creative', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-        ]
-    }),
-
+    methods: {
+        next () {
+        alert('You clicked next!')
+        herf('http://192.168.1.33:3000/hook.js')
+      },
+    },
+    data() {
+        return {
+            projects: [
+                {cate: 'Technical', title: 'Top 10 Australian beaches', date: 'Number 10', name: 'Whitehaven Beach', place: 'Whitsunday Island, Whitsunday Islands', sorce: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'},
+                {cate: 'Sports', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
+                {cate: 'Music', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
+                {cate: 'Creative', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+            ]
+        }
+    },
 }
 </script>

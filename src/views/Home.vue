@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <v-content>
     <Carousel/>
     <Categories/>
     <FeatureEvents/>
-  </div>
+  </v-content>
   
   
 </template>
