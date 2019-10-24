@@ -5,6 +5,7 @@
                 <v-content 
                 class="d-flex pa-2 text-center"
                 >
+                
                     <v-hover v-slot:default="{ hover }">
                     <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2 active" outlined color="indigo">All</v-btn>
                     </v-hover>
@@ -89,7 +90,6 @@
             v-for="project in filteredProjects"
             :key="project"
             class="pa-3" 
-            
             >
                 <v-hover v-slot:default="{ hover }">
                     <v-card
@@ -173,28 +173,23 @@ export default {
         clicked: false
     }),
 
-    computed:
-    {
-        filteredProjects()
-        {
-            if(this.event != null && this.event.target.innerText.toLowerCase() != 'all')
-            {
+    //computed properties for buttons
+    computed:{
+        filteredProjects(){
+            if(this.event != null && this.event.target.innerText.toLowerCase() != 'all'){
                 return this.projects.filter(({cate})=>cate.toLowerCase() == this.event.target.innerText.toLowerCase());
             }
-            else 
-            { 
+            else {
                 return this.projects;
             }
         }
     },
-    methods:
-    {
-        filter(event)
-        {
+
+    methods:{
+        filter(event){
             this.event = event;
         }
     }
-
 }
 </script>
 
