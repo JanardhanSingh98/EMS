@@ -7,12 +7,9 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ x: 0, y: 0 })
-      }, 500)
-    })
-  },
+    return { x: 0, y: 0 }
+  }
+  ,
   routes: [
     
     {
