@@ -6,13 +6,15 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  scrollBehavior (to, from, savePosition) {
-    if (savePosition) {
-      return savePosition;
-    } else {
-      return { x:0, y:0}
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+        // , offset: { x: 0, y: 10 }
+      }
     }
-  },
+  }
+  ,
   routes: [
     
     {
