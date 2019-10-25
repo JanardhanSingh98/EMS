@@ -64,6 +64,7 @@ export default {
       console.log(new_value,old_value)
     }
   },
+  
   data(){
     return{
       username:'',
@@ -78,14 +79,14 @@ export default {
       // different methods are available like get,post
 
 
-/*
-this.axios.get('http://localhost:5000/submitlogin').then((response) => {
-        console.log(response.data)
-        // then will work only if server is able to send some data
-      })
+      /*
+      this.axios.get('http://localhost:5000/submitlogin').then((response) => {
+              console.log(response.data)
+              // then will work only if server is able to send some data
+            })
 
 
-*/
+      */
 
 
       // this.axios.post('http://localhost:5000/submitlogin',{username:this.username,password:this.password}).then((response) => {

@@ -5,8 +5,8 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
+   
   routes: [
-    
     {
       path: '/',
       name: 'home',
@@ -32,7 +32,11 @@ export default new Router({
     }
   ],
   scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
-  }
-  ,
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
+  
 })
