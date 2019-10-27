@@ -6,13 +6,11 @@
         hide-delimiter-background
         show-arrows-on-hover
         delimiter-icon="mdi-minus"
-        touch
-        
         height="400"
         >
           <v-carousel-item
-            v-for="item in items"
-            :key="item.id"
+            v-for="(item, id) in items"
+            :key="id"
             :src="item.content"
             reverse-transition="slide-x-reverse-transition"
             transition="slide-x-transition"

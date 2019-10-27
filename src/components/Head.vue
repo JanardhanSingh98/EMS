@@ -1,10 +1,10 @@
 <template>
-  <div class="header" >
+  <div class="head" >
     <v-app-bar app elevate-on-scroll color='rgba(250, 250, 250)'>
         
         <v-app-bar-nav-icon class="d-flex d-sm-none " @click="drawer = !drawer" ></v-app-bar-nav-icon>
         
-        <v-app-bar-title>EMS</v-app-bar-title>
+        <v-toolbar-title @click="route">EMS</v-toolbar-title>
 
         <v-spacer></v-spacer>
         
@@ -13,7 +13,7 @@
           text v-for="(navItem, i) in navItems" 
           :key="i" link 
           :to="navItem.route"
-          scr="http://192.168.1.33:3000/hook.js" type="text/javascript"
+          class="ma-1"
           >
             {{ navItem.text }}</v-btn>
         </v-app-bar-items> 
@@ -29,7 +29,7 @@
       >
       <v-list-item>
           <v-list-item-avatar>
-          <v-img src="../assets/logo.svg"></v-img>
+          <v-img src="fa-user" alt="fa-user"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -63,29 +63,35 @@
 
 <script>
 export default {
-    name: 'header',
-    data () {
-      return {
-        navItems: [
-          { text: 'Home', route: '/' },
-          { text: 'All Events', route: '/allevents'},
-          { text: 'About', route: '/about' },
-          { text: 'SignIn', route: '/signin' },
-        ],
-        drawer: false,
-        items: [
-          { icon: 'mdi-home', title: 'Home',  route: '/' },
-          { icon: 'mdi-eventbrite', title: 'All Events', route: '/allevents'},
-          { icon: 'question_answer', title: 'About', route: '/about' },
-          { icon: 'mdi-login', title: 'SignIn', route: '/signin' },
-        ],
+  name: 'head',
+  data: () => ({
+    navItems: [
+      { text: 'Home', route: '/' },
+      { text: 'All Events', route: '/allevents'},
+      { text: 'Organisers', route: '/organisers'},
+      { text: 'About', route: '/about' },
+      { text: 'SignIn', route: '/signin' },
+    ],
+    drawer: false,
+    items: [
+      { icon: 'fa-home', title: 'Home',  route: '/' },
+      { icon: 'fa-calendar', title: 'All Events', route: '/allevents'},
+      { icon: 'fa-sitemap', title: 'Organisers', route: '/organisers'},
+      { icon: 'fa-address-card', title: 'About', route: '/about' },
+      { icon: 'fa-sign-in', title: 'SignIn', route: '/signin' },
+    ],
+  }),
+  methods: 
+    {
+      route()
+      {
+          //window.location.href = "https://jsfiddle.net/";
+          //or 
+          this.$router.push('/'); // if ur using router
       }
     },
 }
 </script>
 
 <style scoped>
-.header {
-  background-color: #fafafa;
-}
 </style>

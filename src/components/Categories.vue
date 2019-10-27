@@ -11,8 +11,8 @@
                 <v-flex xs12 sm12>
                     <v-row class="text-center ma-2">
                         <v-content 
-                        v-for="button in buttons"
-                        :key="button"
+                        v-for="(button, i) in buttons"
+                        :key="i"
                         class="pa-2"
                         >
                             <v-hover v-slot:default="{ hover }" >                        
@@ -45,7 +45,7 @@ export default {
             {img: require('../assets/logo/gaming.svg'), name: 'Gaming'},
             {img: require('../assets/logo/technical.svg'), name: 'Technical'},
             {img: require('../assets/logo/sports.svg'), name: 'Sports'},
-            {img: require('../assets/logo/sports.svg'), name: 'Sports'},
+            
             
         ]
 
@@ -59,10 +59,7 @@ export default {
             this.$router.push('/allevents'); // if ur using router
         }
     },
-    created() 
-    {
-
-    }
+    
     
 }
 </script>

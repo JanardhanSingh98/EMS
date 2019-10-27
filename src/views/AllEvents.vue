@@ -36,68 +36,96 @@
             </v-row>
         </div>
 
-        <div class="ma-2" >
-            <v-row class="text-center ma-3">
-                <v-content 
-                class="d-flex pa-2 text-center">
-                <v-hover v-slot:default="{ hover }">
-                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >All</v-btn>
-                </v-hover>
-                 <v-hover v-slot:default="{ hover }">
-                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Today</v-btn>
-                </v-hover>
-                <v-hover v-slot:default="{ hover }">
-                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Tomorrow</v-btn>
-                </v-hover>
-                <v-hover v-slot:default="{ hover }">
-                    <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Weekend</v-btn>
-                </v-hover>                  
-                </v-content>
-            </v-row>
-        </div >
-
-        <div class="ma-2">
-            <v-row class="ma-3" >
-                <v-col cols="40" sm="6" md="2"  class="">
-                    <v-menu
-                    v-model="menu2"
-                    :close-on-content-click="true"
-                    :nudge-right="30"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="290px"
-                    >
-                    <template v-slot:activator="{ on }">
-                        <v-text-field
-                        v-model="date"
-                        label="Date"
-                        prepend-icon="event"
-                        readonly
-                        v-on="on"
-                        ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="date" @input="menu2 = false"
-                    
-                    ></v-date-picker>
-                    </v-menu>
-                </v-col>
-            </v-row>
-        </div>
+        <v-container>
+            <v-layout row wrap>
+                <v-flex xs12 sm12>
+                    <div class="ma-2" >
+                        <v-row class="text-center ma-3">
+                            <v-content 
+                            class="d-flex pa-2 text-center">
+                            <v-hover v-slot:default="{ hover }">
+                                <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >All</v-btn>
+                            </v-hover>
+                            <v-hover v-slot:default="{ hover }">
+                                <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Today</v-btn>
+                            </v-hover>
+                            <v-hover v-slot:default="{ hover }">
+                                <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Tomorrow</v-btn>
+                            </v-hover>
+                            <v-hover v-slot:default="{ hover }">
+                                <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >Weekend</v-btn>
+                            </v-hover>                  
+                            </v-content>
+                        </v-row>
+                    </div >
+                </v-flex>
+            </v-layout>
+        </v-container>
 
         <v-container>
-            <v-layout>
-                <v-flex>
+            <v-layout row wrap>
+                <v-flex xs12 sm12>
+                    <div class="ma-2">
+                        <v-row class="ma-3" >
+                            <v-col cols="4" lg="2" class="">
+                                <v-menu
+                                    v-model="menu1"
+                                    :close-on-content-click="false"
+                                    max-width="290"
+                                    >
+                                    <template v-slot:activator="{ on }">
+                                        <v-text-field
+                                        :value="computedDateFormattedMomentjs"
+                                        clearable
+                                        label="Filter By Date"
+                                        readonly
+                                        v-on="on"
+                                        ></v-text-field>
+                                    </template>
+                                    <v-date-picker
+                                        v-model="date"
+                                        @change="menu1 = false"
+                                    ></v-date-picker>
+                                    </v-menu>
+                            </v-col>
+                            <v-spacer></v-spacer>
+                            <v-col cols="4" lg="2">
+                                <v-spacer></v-spacer>
+                                <template >
+                                    <v-spacer></v-spacer>
+                                    <v-select
+                                    v-model="sortBy"
+                                    clearable
+                                    flat
+                                    hide-details
+                                    :items="keys"
+                                    prepend-inner-icon="search"
+                                    label="Sort by"
+                                    ></v-select>
+                                    
+                                </template>
+                            </v-col>
+                        </v-row>
+                    </div>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
+        <v-container>
+            <v-layout row wrap>
+                <v-flex xs12 sm12>
                     <v-row class="justify-center ma-2" >
                         <v-content
                         v-for="project in filteredProjects"
                         :key="project"
-                        class="pa-3" 
+                        class="pa-2" 
                         
                         >
                             <v-hover v-slot:default="{ hover }">
                                 <v-card
                                 class="ma-auto "
                                 max-width="350"
+                                
                                 :elevation="hover ? 24 : 4"
                                 >
                                     <v-img
@@ -114,7 +142,10 @@
                                                 {{project.cate}}
                                             </v-chip>
                                         </div>
-                                        <v-card-title class="align-center fill-height" >{{ project.title }}</v-card-title>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <v-card-title class="align-center">{{ project.title }}</v-card-title>
                                     </v-img>
 
                                     <v-card-text>
@@ -150,30 +181,60 @@
 </template>
 
 <script>
+import moment from 'moment';
 
 export default {
     name: 'allevents',
     components: {},
     data: () => ({
         date: new Date().toISOString().substr(0, 10),
-        menu2: false,
+        menu1: false,
+        keys: [
+            'Date',
+            'EventName',
+            'Title',
+        ],
         projects: [
-            { cate: 'Technical', title: 'Top 10 Australian beaches', date: '2019-10-25', name: 'Whitehaven Beach', place: 'Whitsunday Island, Whitsunday Islands', sorce: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg'},
-            { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-11-5', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            { cate: 'Music', title: 'Top 10 Australian beaches', date: '2020-01-7', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2019-11-3', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-            { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-10-20', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-11-5', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            { cate: 'Adventure', title: 'Top 10 Australian beaches', date: '2019-12-14', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-            { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2020-03-12', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-11-9', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            { cate: 'Adventure', title: 'Top 10 Australian beaches', date: '2019-10-26', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-            { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-09-21', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-08-15', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2019-11-11', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
-            { cate: 'Sports', title: 'Top 10 Australian beaches', date: '2019-11-17', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'},
-            { cate: 'Music', title: 'Top 10 Australian beaches', date: '2019-12-04', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'},
-            { cate: 'Creative', title: 'Top 10 Australian beaches', date: '2020-05-05', name: 'Whitehaven Beach', place: 'Block 14, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
+            { 
+                cate: 'Technical', 
+                title: 'How to Master Competitive Programming?', 
+                date: 'Oct-25-2019', 
+                name: 'Whitehaven Beach', 
+                place: 'BHAU Institute, Shivajinagar, Pune', 
+                sorce: 'https://firebasestorage.googleapis.com/v0/b/eventbeep-production.appspot.com/o/WhatsApp%20Image%202019-08-17%20at%2017.18.15.jpeg?alt=media&token=1eb08d7f-f8d1-412a-85c6-38ba6f457f86'
+            },
+            { 
+                cate: 'Sports', 
+                title: 'Top 10 Australian beaches', 
+                date: 'Nov-5-2019', 
+                name: 'Whitehaven Beach', 
+                place: 'Block 14, Near Tuck Shop', 
+                sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'
+            },
+            { 
+                cate: 'Music', 
+                title: 'Top 10 Australian beaches', 
+                date: 'Jan-01-2020', 
+                name: 'Whitehaven Beach', 
+                place: 'Block 14, Near Tuck Shop', 
+                sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'
+            },
+            { 
+                cate: 'Creative', 
+                title: 'Top 10 Australian beaches', 
+                date: 'Nov-03-2019', 
+                name: 'Whitehaven Beach', 
+                place: 'Block 14, Near Tuck Shop', 
+                sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'
+            },
+            { 
+                cate: 'Adventure', 
+                title: 'Top 10 Australian beaches', 
+                date: 'Dec-14-2019', 
+                name: 'Whitehaven Beach', 
+                place: 'Block 14, Near Tuck Shop', 
+                sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'
+            },
         ],
         event: null,
         clicked: false
@@ -181,7 +242,7 @@ export default {
 
     computed:
     {
-        filteredProjects()
+        filteredProjects() //Filter fun for filter the data
         {
             if(this.event != null && this.event.target.innerText.toLowerCase() != 'all')
             {
@@ -191,11 +252,14 @@ export default {
             { 
                 return this.projects;
             }
-        }
+        },
+        computedDateFormattedMomentjs () {
+            return this.date ? moment(this.date).format('MMM-DD-YYYY') : ''
+        },
     },
     methods:
     {
-        filter(event)
+        filter(event) //Filter Method
         {
             this.event = event;
         }

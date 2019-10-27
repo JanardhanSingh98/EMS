@@ -1,22 +1,22 @@
 <template>
   <v-app class="app">
-    <Header/>
+    <Head/>
     <v-content>
       <router-view/>
     </v-content>
-    <Footer/>
+    <Foot/>
     <bottomNav/>
   </v-app>
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
+import Head from './components/Head.vue';
+import Foot from './components/Foot.vue';
 import bottomNav from './components/bottomNav';
 
 export default {
   name: 'App',
-  components: {Header,Footer,bottomNav},
+  components: {Head,Foot,bottomNav},
   data: () => ({
     //
   }),

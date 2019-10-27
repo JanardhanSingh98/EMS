@@ -11,8 +11,8 @@
                 <v-flex xs12 sm12>
                     <v-row class="justify-center ma-2" >
                         <v-content
-                        v-for="project in projects"
-                        :key="project"
+                        v-for="(project, i) in projects"
+                        :key="i"
                         class="pa-3" 
                         >
                             <v-hover v-slot:default="{ hover }">
