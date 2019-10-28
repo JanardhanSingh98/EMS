@@ -68,14 +68,15 @@ export default {
     navItems: [
       { text: 'Home', route: '/' },
       { text: 'All Events', route: '/allevents'},
+      { text: 'Add Event', route: '/addevent'},
       { text: 'Organisers', route: '/organisers'},
-      { text: 'About', route: '/about' },
       { text: 'SignIn', route: '/signin' },
     ],
     drawer: false,
     items: [
       { icon: 'fa-home', title: 'Home',  route: '/' },
       { icon: 'fa-calendar', title: 'All Events', route: '/allevents'},
+      { icon: 'fa-plus-square', title: 'Add Event', route: '/addevent'},
       { icon: 'fa-sitemap', title: 'Organisers', route: '/organisers'},
       { icon: 'fa-address-card', title: 'About', route: '/about' },
       { icon: 'fa-sign-in', title: 'SignIn', route: '/signin' },

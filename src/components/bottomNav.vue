@@ -5,7 +5,7 @@
     grow
     app
     shift
-    color="blue accent-2"
+    color="black"
     >
         <v-btn router-link to="/">
         <span>Home</span>
@@ -17,14 +17,14 @@
         <v-icon>fa-calendar</v-icon>
         </v-btn>
 
+        <v-btn router-link to="/addevent">
+        <span>Add Event</span>
+        <v-icon>fa-plus-square</v-icon>
+        </v-btn>
+
         <v-btn router-link to="/organisers">
         <span>Organisers</span>
         <v-icon>fa-sitemap</v-icon>
-        </v-btn>
-
-        <v-btn router-link to="/about">
-        <span>About</span>
-        <v-icon>fa-address-card</v-icon>
         </v-btn>
 
         <v-btn router-link to="/signin">

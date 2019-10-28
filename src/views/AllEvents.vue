@@ -1,5 +1,27 @@
 <template>
     <div class="allevents ">
+
+        <v-container>
+            <v-layout row wrap>
+                <v-flex xs12 sm12>
+                    <div class="ma-2">  
+                        <v-text-field
+                            v-model="search"
+                            clearable
+                            flat
+                            outlined
+                            solo
+                            filled
+                            dense
+                            hide-details
+                            prepend-inner-icon="search"
+                            label="Search Events"
+                        ></v-text-field>
+                    </div>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
         <div class="ma-2">
             <v-row class="text-center ma-3">
                 <v-content 
@@ -206,7 +228,7 @@ export default {
             { 
                 cate: 'Sports', 
                 title: 'Top 10 Australian beaches', 
-                date: 'Nov-5-2019', 
+                date: 'Nov-05-2019', 
                 name: 'Whitehaven Beach', 
                 place: 'Block 14, Near Tuck Shop', 
                 sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'

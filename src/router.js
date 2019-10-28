@@ -31,6 +31,11 @@ export default new Router({
       component: () => import('./views/Organisers.vue')
     },
     {
+      path: '/addevent',
+      name: 'addevent',
+      component: () => import('./views/AddEvent.vue')
+    },
+    {
       path: '/signin',
       name: 'signin',
       component: () => import('./views/SignIn.vue')
