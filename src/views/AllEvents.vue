@@ -138,8 +138,8 @@
                 <v-flex xs12 sm12>
                     <v-row class="justify-center ma-2" >
                         <v-content
-                        v-for="project in filteredProjects"
-                        :key="project"
+                        v-for="(project, i) in filteredProjects"
+                        :key="i"
                         class="pa-2" 
                         
                         >

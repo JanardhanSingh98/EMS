@@ -29,7 +29,7 @@
       >
       <v-list-item>
           <v-list-item-avatar>
-          <v-img src="fa-user" alt="fa-user"></v-img>
+          <v-img src="../assets/logo.svg" alt="user"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
