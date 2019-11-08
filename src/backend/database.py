@@ -1,6 +1,3 @@
-import mysql.connector;
-import sqlhost
-
 def openconnection(**args):
     tablename=args.get('tablename',None);
     databasename=args.get('databasename','users');

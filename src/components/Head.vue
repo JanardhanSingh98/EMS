@@ -13,7 +13,10 @@
           text v-for="(navItem, i) in navItems" 
           :key="i" link 
           :to="navItem.route"
-          class="ma-1"
+          class="ma-1 "
+          color="black"
+          
+          
           >
             {{ navItem.text }}</v-btn>
         </v-app-bar-items> 

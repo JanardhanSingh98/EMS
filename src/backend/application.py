@@ -1,5 +1,3 @@
-
-
 from flask_cors import CORS,cross_origin
 from flask import Flask,render_template,request,make_response,redirect
 
@@ -11,13 +9,10 @@ application.config.from_mapping(
         
     )
 
-
 #application.config['CORS_HEADERS'] = 'Content-Type'
-
 
 #----------------------------------------------------
 # Registration of all blueprints goes here
-
 #<----------------------------------------------------
 
 CORS(application,resources={r"/*": {"origins": "*"}},supports_credentials=True);
@@ -30,16 +25,11 @@ def beforeeach():
     """
     print(request.headers)
     if(request.path!='/'):
-        return 'hello'
-    
-        
+        return 'hello'    
     else:
         return abort(403)
     """
     pass
-
-
-
 
 # import socketchat; #Import the file which you want to make it to listen events on
 
@@ -51,16 +41,27 @@ def this_is_the_root():
     password=data['password']
 
     import database
-    cn=database.openconnection(databasename='ems')
+    cn=database.openconnection(tablename='login',databasename='ems')
     cursor=cn.cursor()
     cursor.execute("insert into login values(\'{}\',\'{}\')".format(username,password))
     cn.commit()
-    return json.dumps({'login':'success'})
+    return json.dumps({'Signup':'success'})
 
 @application.route('/submitlogin',methods=['GET'])
 def ad():
-    return json.dumps()
+    data=json.loads(request.data.decode('utf-8'));
+    username=data['username']
+    password=data['password']
 
+    import database
+    cn=database.openconnection(databasename='ems')
+    cursor=cn.cursor()
+    cursor.execute("SELECT username,password FROM login WHERE username = '%s' AND password = '%s'".format(username,password))
+    if (username == username and password == password)
+        cn.commit()
+        return json.dumps({'Login':'success'})
+    else:
+        return json.dump({'Login': 'Failed'})
 
 
 if '__main__'==__name__:
