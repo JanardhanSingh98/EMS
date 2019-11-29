@@ -34,7 +34,7 @@
             id: "1", content: 'https://images.unsplash.com/photo-1559738140-bc41e4e5d118?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80',
           },
           {
-            id: "2", content: 'https://images.unsplash.com/photo-1559738140-bc41e4e5d118?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80',
+            id: "2", content: 'No Data',
           },
           {
             id: "3", content: 'https://images.unsplash.com/photo-1563335697-55451be2dc65?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&dl=james-barr-hSBwcfbMWO4-unsplash.jpg',

@@ -4,21 +4,37 @@
         
         <v-app-bar-nav-icon class="d-flex d-sm-none " @click="drawer = !drawer" ></v-app-bar-nav-icon>
         
-        <v-toolbar-title @click="route">EMS</v-toolbar-title>
+        <v-toolbar-title>EVENTOO</v-toolbar-title>
 
         <v-spacer></v-spacer>
         
         <v-app-bar-items class="d-none d-sm-flex">
-          <v-btn 
+          <!--<v-btn 
           text v-for="(navItem, i) in navItems" 
-          :key="i" link 
+          :key="i"
           :to="navItem.route"
           class="ma-1 "
           color="black"
-          
-          
-          >
-            {{ navItem.text }}</v-btn>
+          >{{ navItem.text }}</v-btn>-->
+
+          <v-btn :elevation="0" to="/" class="ma-1">Home</v-btn>
+        
+      
+          <v-btn :elevation="0" to="/allevents" class="ma-1">ALL Events</v-btn>
+        
+      
+          <v-btn :elevation="0" to="/addevent" class="ma-1">Host Event</v-btn>
+        
+      
+          <v-btn :elevation="0" to="/organisers" class="ma-1">organisers</v-btn>
+        
+      
+          <v-btn :elevation="0" v-if="user == null" to="/signin" class="ma-1">Login</v-btn>
+
+
+          <v-btn :elevation="0" v-else @click="logout" class="ma-1">Logout</v-btn>
+            
+            
         </v-app-bar-items> 
     </v-app-bar>
     
@@ -65,16 +81,18 @@
 </template>
 
 <script>
+import {fb} from '@/firebase'
 export default {
   name: 'head',
   data: () => ({
-    navItems: [
+    user: null,
+    /*navItems: [
       { text: 'Home', route: '/' },
       { text: 'All Events', route: '/allevents'},
       { text: 'Add Event', route: '/addevent'},
       { text: 'Organisers', route: '/organisers'},
-      { text: 'SignIn', route: '/signin' },
-    ],
+      { text: 'SignIn', route: '/signin'},
+    ],*/
     drawer: false,
     items: [
       { icon: 'fa-home', title: 'Home',  route: '/' },
@@ -85,14 +103,18 @@ export default {
       { icon: 'fa-sign-in', title: 'SignIn', route: '/signin' },
     ],
   }),
+  created(){
+    this.user=fb.auth().currentUser
+  },
   methods: 
     {
-      route()
-      {
-          //window.location.href = "https://jsfiddle.net/";
-          //or 
-          this.$router.push('/'); // if ur using router
-      }
+      logout(){
+        fb.auth().signOut()
+        .then(()=>{
+          console.log("logout")
+          this.$router.replace('/signin');
+        })
+      },
     },
 }
 </script>

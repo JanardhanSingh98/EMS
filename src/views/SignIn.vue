@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import {fb} from '@/firebase'
 export default {
   name: "App",
   data:() => ({
@@ -46,9 +47,10 @@ export default {
       // your code to login user
       // different methods are available like get,post
       
-      this.axios.post('http://localhost:5000/submitlogin',{username:this.username,password:this.password})
-      .then((response) => {
-        console.log(response.data)
+      fb.auth().signInWithEmailAndPassword(this.username, this.password)
+      .then(() => {
+        console.log("logedin")
+        console.log(fb.auth().currentUser.email)
         this.$router.push('/')
         // then will work only if server is able to send some data
       })

@@ -33,12 +33,24 @@ export default new Router({
     {
       path: '/addevent',
       name: 'addevent',
-      component: () => import('./views/AddEvent.vue')
+      component: () => import('./views/AddEvent.vue'),
+      children: [
+        {
+          path: 'events',
+          name: 'events',
+          component: () => import('@/components/afterLogin/Events.vue')
+        }
+      ]
     },
     {
       path: '/signin',
       name: 'signin',
       component: () => import('./views/SignIn.vue')
+    },
+    {
+      path: '/eventdetail',
+      name: 'eventdetail',
+      component: () => import('./views/EventDetail')
     }
   ],
   scrollBehavior (to, from, savedPosition) {

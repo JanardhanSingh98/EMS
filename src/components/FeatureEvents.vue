@@ -31,15 +31,16 @@
                                             class="ma-2 text-uppercase font-weight-bold"
                                             color="primary"
                                             label
+                                            @click="to"
                                             >
                                                 {{project.cate}}
                                             </v-chip>
                                         </div>
-                                        <v-card-title class="align-center fill-height" >{{ project.title }}</v-card-title>
                                     </v-img>
 
                                     <v-card-text>
                                         <span>{{ project.date }}</span><br>
+                                        <span class="text--primary font-weight-bold font-weight-black" >{{ project.title }}</span> <br>
                                         <span class="text--primary">
                                             <span>{{ project.name }}</span><br>
                                             <span>{{ project.place}}</span>
@@ -47,15 +48,12 @@
                                     </v-card-text>
 
                                     <v-card-actions>
+                                        
+                                        <v-spacer></v-spacer>
                                         <v-btn
                                             text
-                                            color="orange"
-                                        >
-                                            Share
-                                        </v-btn>
-                                        <v-btn
-                                            text
-                                            color="orange"
+                                            color="primary"
+                                            @click="submit"
                                         >
                                             Explore
                                         </v-btn>
@@ -80,5 +78,13 @@ export default {
             {cate: 'Creative', title: 'Top 10 Australian beaches', date: 'Number 20', name: 'Whitehaven Beach', place: 'Block 15, Near Tuck Shop', sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'},
         ]
     }),
+    methods: {
+        submit() {
+            this.$router.push('/eventdetail')
+        },
+        to() {
+            this.$router.push('/allevents')
+        }
+    }
 }
 </script>

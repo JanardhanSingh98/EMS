@@ -160,18 +160,16 @@
                                             class="ma-2 text-uppercase font-weight-bold"
                                             color="primary"
                                             label
+                                            @click="to"
                                             >
                                                 {{project.cate}}
                                             </v-chip>
                                         </div>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <v-card-title class="align-center">{{ project.title }}</v-card-title>
                                     </v-img>
 
                                     <v-card-text>
                                         <span>{{ project.date }}</span><br>
+                                        <span class="text--primary font-weight-bold font-weight-black" >{{ project.title }}</span> <br>
                                         <span class="text--primary">
                                             <span>{{ project.name }}</span><br>
                                             <span>{{ project.place}}</span>
@@ -179,15 +177,11 @@
                                     </v-card-text>
 
                                     <v-card-actions>
+                                        <v-spacer></v-spacer>
                                         <v-btn
                                             text
-                                            color="orange"
-                                        >
-                                            Share
-                                        </v-btn>
-                                        <v-btn
-                                            text
-                                            color="orange"
+                                            color="primary"
+                                            @click="goto"
                                         >
                                             Explore
                                         </v-btn>
@@ -284,7 +278,11 @@ export default {
         filter(event) //Filter Method
         {
             this.event = event;
-        }
+        },
+        goto() {
+            this.$router.push('/eventdetail')
+        },
+        
     }
 }
 </script>
