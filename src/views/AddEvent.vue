@@ -1,19 +1,104 @@
 <template>
   <div class="addevent">
-    
-    <Sidebar/>
-      <div>
-        <router-view/>
-      </div>
+    <div>
+      <router-view/>
+    </div>
 
+    <v-speed-dial
+      v-model="fab"
+      fab
+      bottom
+      right
+      absolute
+      :direction="direction"
+      open-on-hover
+      :transition="transition"
+    >
+      <template v-slot:activator>
+        <v-btn
+          v-model="fab"
+          color="blue darken-2"
+          dark
+          fab
+        >
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-icon v-else>mdi-pencil</v-icon>
+        </v-btn>
+      </template>
+      <v-btn
+        fab
+        dark
+        small
+        color="green"
+      >
+        <v-icon>mdi-account-circle</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="indigo"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        color="red"
+        @click="goto"
+        active
+      >
+        <v-icon>mdi-home-city</v-icon>
+      </v-btn>
+    </v-speed-dial>
   </div>
 </template>
 
 <script>
-import Sidebar from '@/components/afterLogin/Sidebar.vue'
-//import Events from '../Components/afterlogin/Events.vue'
 export default {
   name: 'addevent',
-  components: {Sidebar,}
+  components: {},
+  data: () => ({
+    direction: 'top',
+    fab: false,
+    fling: false,
+    hover: false,
+    tabs: null,
+    top: false,
+    right: true,
+    bottom: true,
+    left: false,
+    transition: 'slide-y-reverse-transition',
+  }),
+  methods:{
+    goto() {
+    this.$router.push('/addevent/events')
+    },
+  },
+  
+  watch: {
+      
+      right (val) {
+        this.left = !val
+      },
+      bottom (val) {
+        this.top = !val
+      },
+      
+    },
 }
 </script>
+
+<style scoped>
+  /* This is for documentation purposes and will not be needed in your application */
+  #create .v-speed-dial {
+    position: absolute;
+  }
+
+  #create .v-btn--floating {
+    position: relative;
+  }
+
+  
+</style>

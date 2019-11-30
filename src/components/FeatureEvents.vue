@@ -41,7 +41,7 @@
                                     <v-card-text>
                                         <span>{{ project.date }}</span><br>
                                         <span class="text--primary font-weight-bold font-weight-black" >{{ project.title }}</span> <br>
-                                        <span class="text--primary">
+                                        <span class="">
                                             <span>{{ project.name }}</span><br>
                                             <span>{{ project.place}}</span>
                                         </span>
