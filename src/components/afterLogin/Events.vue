@@ -83,7 +83,7 @@
                       >
                         <template v-slot:activator="{ on }">
                           <v-text-field
-                          :value="computedDateFormattedMomentjs"
+                          v-model="date1"
                           label="Start Date"
                           hint="MMM-DD-YYYY format"
                           clearable
@@ -95,7 +95,7 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          v-model="date" 
+                          v-model="date1" 
                           @input="menu1 = false"
                         ></v-date-picker>
                       </v-menu>
@@ -113,7 +113,7 @@
                       >
                         <template v-slot:activator="{ on }">
                           <v-text-field
-                          :value="computedDateFormattedMomentjs"
+                          v-model="date2"
                           label="Start Date"
                           hint="MMM-DD-YYYY format"
                           clearable
@@ -125,7 +125,7 @@
                           ></v-text-field>
                         </template>
                         <v-date-picker
-                          v-model="date" 
+                          v-model="date2" 
                           @input="menu2 = false"
                         ></v-date-picker>
                       </v-menu>
@@ -136,16 +136,48 @@
                   <span class="font-weight-medium ">Event Description</span>
                   <v-divider ></v-divider><br>
                   <v-row>
-                    <div>
-                      <pmd
-                        :showTextarea="true"
-                        :showToolbar="true"
-                        v-model="value" 
-                        :plugins="{katex: true}"
-                    ></pmd>
-                    </div>
+                    <v-col>
+                      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                 
+                    </v-col>
+                  </v-row><br>
+
+                  <span class="font-weight-medium ">Organiser details</span>
+                  <v-divider ></v-divider><br>
+                  <v-row>
+                    <v-col>
+                      <v-text-field outlined label="Organiser name"></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field outlined label="Phone number"></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field outlined label="email"></v-text-field>
+                    </v-col>
+                  </v-row><br>
+
+                  <span class="font-weight-medium ">Venue</span>
+                  <v-divider ></v-divider><br>
+                  <v-row>
+                    <v-col>
+                      <v-text-field outlined label="Address"></v-text-field>
+                    </v-col>
                   </v-row>
 
+                  <v-btn
+                    class="ma-2"
+                    :loading="loading4"
+                    :disabled="loading4"
+                    color="info"
+                    @click="submit"
+                  >
+                    Submit
+                    <template v-slot:loader>
+                      <span class="custom-loader">
+                        <v-icon light>cached</v-icon>
+                      </span>
+                    </template>
+                  </v-btn>
                 </v-container>
               </v-flex>
             </v-layout>
@@ -174,7 +206,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
   export default {
     data: () => ({
@@ -190,12 +222,16 @@ import moment from 'moment';
           'Technical',
           'Game',
       ],
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+          // The configuration of the editor.
+      },
+      loader: null,
+      loading4: false,
     }),
 
     computed: {
-      computedDateFormattedMomentjs () {
-            return this.date ? moment(this.date).format('MMM-DD-YYYY') : ''
-        },
       
     },
 
@@ -204,12 +240,56 @@ import moment from 'moment';
     },
 
     methods: {
-      
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
       },
+      submit () {
+        this.$router.push('/allevents')
+      }
+    }
   }
 </script>
 
 <style>
-/* Helper classes */
-
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
