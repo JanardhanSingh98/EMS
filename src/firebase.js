@@ -1,4 +1,5 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 var firebaseConfig = {
     apiKey: "AIzaSyA6h8Mg4QNU0OBoQ-VLuD4yNVxuu7OeogQ",
     authDomain: "eventoo-8cecb.firebaseapp.com",
@@ -11,5 +12,5 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   const fb = firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-  export {fb}
+  const db = firebase.firestore();
+  export {fb, db}

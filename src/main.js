@@ -11,6 +11,12 @@ import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
+import VueFirestore from 'vue-firestore';
+//import { fb } from '@/firestore';
+require('firebase/firestore');
+
+Vue.use(VueFirestore);
+
 Vue.use( CKEditor );
 
 Vue.use(VueMaterial);
