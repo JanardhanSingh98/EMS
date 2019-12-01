@@ -23,6 +23,8 @@
         </v-layout>
       </v-container>
 
+      <!--<h1>{{ id }}</h1>-->
+
       <v-container>
         <v-layout row wrap>
           <v-flex xs12>
@@ -30,10 +32,10 @@
               <v-row>
                 <v-col cols="12" sm="12" md="" lg="9">
                   <div >
-                    <span class="font-weight-bold display-1" > Out of Context - An English Poetry Club - Baner </span>
+                    <span class="font-weight-bold display-1" > {{get.ename}} </span>
                     <br>
                     <br>
-                    <v-chip outlined>Entertainment</v-chip>
+                    <v-chip outlined>{{get.ecato}}</v-chip>
                     <v-list shaped  >
 
                       
@@ -46,7 +48,7 @@
                           </v-list-item-icon>
                           <v-list-item-content>
                             <v-list-item-title class="font-weight-light subtitle-2" >
-                              Mandai Market, Amrale Road, Mandai, Shukrawar Peth, Pune, Maharashtra, India
+                              {{get.adress}}
                             </v-list-item-title>
                           </v-list-item-content>
 
@@ -62,7 +64,7 @@
                             </v-list-item-icon>
                             <v-list-item-content>
                               <v-list-item-title class="font-weight-light subtitle-2 ">
-                                Nov 24th 2019
+                                {{get.date1}} to {{ get.date2 }}
                               </v-list-item-title>
                             </v-list-item-content>
                       </v-list-item>
@@ -77,13 +79,7 @@
                       <v-tab-item>
                         <br>
                         <v-container background-color="transparent" color="blue">
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam, reprehenderit. Itaque, hic recusandae sunt, sint deleniti odit dolores facere autem quam doloribus similique! Dolores ab vel obcaecati quas error tenetur.
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, molestiae? Ea vero culpa dolores suscipit quisquam autem tempora dolor doloremque nemo! Tenetur consequuntur dignissimos voluptatibus reprehenderit quam quod nobis. Harum!
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, quia? Quasi ratione ex eveniet aut sint consequatur inventore corrupti alias omnis accusantium provident, nihil ut magnam, assumenda sapiente. Nihil, maiores.
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid illo expedita asperiores error, facere blanditiis quibusdam necessitatibus unde fugiat consequuntur consequatur sequi deleniti exercitationem cum aut possimus dolore. Ad, sequi?
-                          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, obcaecati quasi, laboriosam voluptatum accusamus ad doloribus ea hic soluta deleniti consectetur eos earum sapiente veniam distinctio, velit debitis! Ipsum, non.
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed beatae in repellat suscipit repellendus odit voluptate sapiente, tenetur cumque deserunt modi nam aliquam qui molestiae et error pariatur quod vero!
-                          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde asperiores deleniti quae accusamus. Voluptates voluptatibus dolorem a commodi ex enim voluptate quos quas quae, quod soluta natus dolorum, in laboriosam.
+                         {{get.editorData}}
                       
                         </v-container>
                       </v-tab-item>
@@ -92,7 +88,7 @@
                         Venue
                       </v-tab>
                       <v-tab-item>
-                        abc
+                        {{get.adress}}
                       </v-tab-item>
                     </v-tabs>
 
@@ -109,7 +105,7 @@
 
                 <v-col cols="12" sm="12" md="" lg="3">
                   <div class="text-center"  >
-                    <v-btn width="800" rounded color="primary" dark>Register</v-btn>
+                    <v-btn width="800" rounded color="primary" v-bind:disabled="get.date1 <= currentDate">Register</v-btn>
                   </div><br>
                   <div class="text-center" elevation>
                     <span class="font-weight-bold title ">Organiser Contact</span>
@@ -126,7 +122,7 @@
                           </v-list-item-icon>
                           <v-list-item-content>
                             <v-list-item-title class="text-left font-weight-light subtitle-2" >
-                              SPW Expedition
+                              {{get.oname}}
                             </v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
@@ -139,7 +135,7 @@
                           </v-list-item-icon>
                           <v-list-item-content>
                             <v-list-item-title class="text-left font-weight-light subtitle-2 ">
-                              9431455187
+                              {{get.ophone}}
                             </v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
@@ -152,7 +148,7 @@
                           </v-list-item-icon>
                           <v-list-item-content>
                             <v-list-item-title class="text-left font-weight-light subtitle-2 ">
-                              contact@eventbeep.com
+                              {{get.oemail}}
                             </v-list-item-title>
                           </v-list-item-content>
                         </v-list-item>
@@ -165,9 +161,39 @@
               </v-row>
             </div>
             
-            
           </v-flex>
         </v-layout>
       </v-container>
     </div>
 </template>
+
+
+<script>
+import { db } from '@/firebase'
+export default {
+  data: () => ({
+    currentDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
+    id: null,
+    get: {
+      ename: null,
+      ecato: null,
+      date1: null,
+      date2: null,
+      editorData: null,
+      oname: null, 
+      ophone: null, 
+      oemail: null,
+      adress: null,
+      add_date: null,
+      edit_date: null,
+    },
+  }),
+  created() {
+    this.id = this.$route.params.id;
+    db.collection('events').doc(this.id).get().then( (doc) => {
+      this.get = doc.data();
+      console.log(doc.data())
+    });
+  },
+}
+</script>

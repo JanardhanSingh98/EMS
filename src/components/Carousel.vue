@@ -1,7 +1,7 @@
 <template>
   <v-container class="crousel">
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex xs12 md12 lg12>
         <v-carousel
         hide-delimiter-background
         show-arrows-on-hover

@@ -48,9 +48,14 @@ export default new Router({
       component: () => import('./views/SignIn.vue')
     },
     {
-      path: '/eventdetail',
+      path: '/eventdetail/:id',
       name: 'eventdetail',
       component: () => import('./views/EventDetail')
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('./views/Admin')
     }
   ],
   scrollBehavior (to, from, savedPosition) {

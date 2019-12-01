@@ -5,18 +5,8 @@
             <v-layout row wrap>
                 <v-flex xs12 sm12>
                     <div class="ma-2">  
-                        <v-text-field
-                            v-model="search"
-                            clearable
-                            flat
-                            outlined
-                            solo
-                            filled
-                            dense
-                            hide-details
-                            prepend-inner-icon="search"
-                            label="Search Events"
-                        ></v-text-field>
+                        <v-text-field v-model="search" clearable flat outlined solo filled dense hide-details
+                            prepend-inner-icon="search" label="Search Events"></v-text-field>
                     </div>
                 </v-flex>
             </v-layout>
@@ -24,35 +14,33 @@
 
         <div class="ma-2">
             <v-row class="text-center ma-3">
-                <v-content 
-                class="d-flex pa-2 text-center"
-                >
+                <v-content class="d-flex pa-2 text-center">
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2 active" outlined color="indigo">All</v-btn>
+                    <v-btn @click="game('All')" :elevation="hover ? 20 : 4" class="ma-2 active" outlined color="indigo">All</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Adventure</v-btn>
+                    <v-btn @click="game('Adventure')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Adventure</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Creative</v-btn>
+                    <v-btn @click="game('Creative')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Creative</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Entertainment</v-btn>
+                    <v-btn @click="game('Entertainment')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Entertainment</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Startups</v-btn>
+                    <v-btn @click="game('Startups')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Startups</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Gaming </v-btn>
+                    <v-btn @click="game('Gaming')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Gaming </v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Technical</v-btn>
+                    <v-btn @click="game('Technical')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Technical</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Sports</v-btn>
+                    <v-btn @click="game('Sports')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Sports</v-btn>
                     </v-hover>
                     <v-hover v-slot:default="{ hover }">
-                    <v-btn @click="filter($event)" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Music</v-btn>
+                    <v-btn @click="game('Music')" :elevation="hover ? 20 : 4" class="ma-2" outlined color="indigo">Music</v-btn>
                     </v-hover>
                 </v-content>
             </v-row>
@@ -63,8 +51,7 @@
                 <v-flex xs12 sm12>
                     <div class="ma-2" >
                         <v-row class="text-center ma-3">
-                            <v-content 
-                            class="d-flex pa-2 text-center">
+                            <v-content class="d-flex pa-2 text-center">
                             <v-hover v-slot:default="{ hover }">
                                 <v-btn class="ma-2" :elevation="hover ? 20 : 4" outlined color="indigo" >All</v-btn>
                             </v-hover>
@@ -90,40 +77,20 @@
                     <div class="ma-2">
                         <v-row class="ma-3" >
                             <v-col cols="4" lg="2" class="">
-                                <v-menu
-                                    v-model="menu1"
-                                    :close-on-content-click="false"
-                                    max-width="290"
-                                    >
+                                <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition" max-width="290">
                                     <template v-slot:activator="{ on }">
-                                        <v-text-field
-                                        :value="computedDateFormattedMomentjs"
-                                        clearable
-                                        label="Filter By Date"
-                                        readonly
-                                        v-on="on"
-                                        ></v-text-field>
+                                        <v-text-field v-model="filterDate"  clearable label="Filter By Date" readonly v-on="on"></v-text-field>
                                     </template>
-                                    <v-date-picker
-                                        v-model="date"
-                                        @change="menu1 = false"
-                                    ></v-date-picker>
+                                    <v-date-picker v-model="filterDate" @change="menu1 = false"></v-date-picker>
                                     </v-menu>
+                                    <v-btn text outlined>search</v-btn>
                             </v-col>
                             <v-spacer></v-spacer>
                             <v-col cols="4" lg="2">
                                 <v-spacer></v-spacer>
                                 <template >
                                     <v-spacer></v-spacer>
-                                    <v-select
-                                    v-model="sortBy"
-                                    clearable
-                                    flat
-                                    hide-details
-                                    :items="keys"
-                                    prepend-inner-icon="search"
-                                    label="Sort by"
-                                    ></v-select>
+                                    <v-select v-model="sortBy" clearable flat hide-details :items="keys" prepend-inner-icon="search" label="Sort by"></v-select>
                                     
                                 </template>
                             </v-col>
@@ -135,54 +102,31 @@
 
         <v-container>
             <v-layout row wrap>
-                <v-flex xs12 sm12>
+                <v-flex xs="12" sm="12">
                     <v-row class="justify-center ma-2" >
-                        <v-content
-                        v-for="(project, i) in filteredProjects"
-                        :key="i"
-                        class="pa-2" 
-                        
-                        >
+                        <v-content v-for="(get, i) in gets" v-bind:key="i" class="pa-2">
                             <v-hover v-slot:default="{ hover }">
-                                <v-card
-                                class="ma-auto "
-                                max-width="350"
-                                
-                                :elevation="hover ? 24 : 4"
-                                >
-                                    <v-img
-                                    class="white--text"
-                                    max-height="200px"
-                                    :src="project.sorce"
-                                    >
+                                <v-card class="ma-auto" max-width="350" :elevation="hover ? 24 : 4">
+                                    <v-img class="white--text" max-height="200px" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/12/16131147/future-phone-mobile-live-events-technology-trends.png">
                                         <div align="right">
-                                            <v-chip
-                                            class="ma-2 text-uppercase font-weight-bold"
-                                            color="primary"
-                                            label
-                                            @click="to"
-                                            >
-                                                {{project.cate}}
+                                            <v-chip class="ma-2 text-uppercase font-weight-bold" color="primary" label @click="to">
+                                                {{get.ecato}}
                                             </v-chip>
                                         </div>
                                     </v-img>
 
                                     <v-card-text>
-                                        <span>{{ project.date }}</span><br>
-                                        <span class="text--primary font-weight-bold font-weight-black" >{{ project.title }}</span> <br>
+                                        <span>{{ get.date1 }} - {{ get.date2 }}</span><br>
+                                        <span class="text--primary font-weight-bold font-weight-black" >{{ get.ename }}</span> <br>
                                         <span class="">
-                                            <span>{{ project.name }}</span><br>
-                                            <span>{{ project.place}}</span>
+                                            <span>{{ get.editorData.slice(0, 15) }}</span><br>
+                                            <span>{{ get.adress}}</span>
                                         </span>
                                     </v-card-text>
 
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn
-                                            text
-                                            color="primary"
-                                            @click="goto"
-                                        >
+                                        <v-btn text color="primary" @click="goto(get)"  v-bind:to="'/eventdetail/'+get['.key']">
                                             Explore
                                         </v-btn>
                                     </v-card-actions>
@@ -197,12 +141,13 @@
 </template>
 
 <script>
-import moment from 'moment';
+import { db } from '@/firebase'
 
 export default {
     name: 'allevents',
     components: {},
     data: () => ({
+        filterDate: null,
         date: new Date().toISOString().substr(0, 10),
         menu1: false,
         keys: [
@@ -210,77 +155,63 @@ export default {
             'EventName',
             'Title',
         ],
-        projects: [
-            { 
-                cate: 'Technical', 
-                title: 'How to Master Competitive Programming?', 
-                date: 'Oct-25-2019', 
-                name: 'Whitehaven Beach', 
-                place: 'BHAU Institute, Shivajinagar, Pune', 
-                sorce: 'https://firebasestorage.googleapis.com/v0/b/eventbeep-production.appspot.com/o/WhatsApp%20Image%202019-08-17%20at%2017.18.15.jpeg?alt=media&token=1eb08d7f-f8d1-412a-85c6-38ba6f457f86'
-            },
-            { 
-                cate: 'Sports', 
-                title: 'Top 10 Australian beaches', 
-                date: 'Nov-05-2019', 
-                name: 'Whitehaven Beach', 
-                place: 'Block 14, Near Tuck Shop', 
-                sorce: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'
-            },
-            { 
-                cate: 'Music', 
-                title: 'Top 10 Australian beaches', 
-                date: 'Jan-01-2020', 
-                name: 'Whitehaven Beach', 
-                place: 'Block 14, Near Tuck Shop', 
-                sorce: 'https://cdn.vuetifyjs.com/images/cards/road.jpg'
-            },
-            { 
-                cate: 'Creative', 
-                title: 'Top 10 Australian beaches', 
-                date: 'Nov-03-2019', 
-                name: 'Whitehaven Beach', 
-                place: 'Block 14, Near Tuck Shop', 
-                sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'
-            },
-            { 
-                cate: 'Adventure', 
-                title: 'Top 10 Australian beaches', 
-                date: 'Dec-14-2019', 
-                name: 'Whitehaven Beach', 
-                place: 'Block 14, Near Tuck Shop', 
-                sorce: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'
-            },
-        ],
+        
         event: null,
-        clicked: false
+        clicked: false,
+
+        gets: [],
+        get: {
+          ename: null,
+          ecato: null,
+          date1: null,
+          date2: null,
+          editorData: null,
+          oname: null, 
+          ophone: null, 
+          oemail: null,
+          adress: null,
+          status: null,
+          add_date: null,
+          edit_date: null,
+        },
+
     }),
 
-    computed:
-    {
-        filteredProjects() //Filter fun for filter the data
-        {
-            if(this.event != null && this.event.target.innerText.toLowerCase() != 'all')
-            {
-                return this.projects.filter(({cate})=>cate.toLowerCase() == this.event.target.innerText.toLowerCase());
-            }
-            else 
-            { 
-                return this.projects;
-            }
-        },
-        computedDateFormattedMomentjs () {
-            return this.date ? moment(this.date).format('MMM-DD-YYYY') : ''
-        },
+    firestore() {
+      return {
+        gets: db.collection('events').where('status', '==', true).orderBy('date1')
+      }
     },
+
+    computed(){
+      
+    },
+
     methods:
     {
-        filter(event) //Filter Method
-        {
-            this.event = event;
+        game(para) {
+          console.log(para)
+          /*if(para === 'All') {
+            this.gets = db.collection('events').where('status', '==', true).orderBy('date1');
+          }
+
+          db.collection("events").where("ecato", "==", para).onSnapshot( (querySnapshot) => {
+            this.gets = [];
+            querySnapshot.forEach( (doc) => {
+              
+              this.gets.push(doc.data());
+              console.log(doc.data().id+ ' '+doc.data())
+            });
+            console.log(this.gets);
+         });*/
+
+
+
         },
-        goto() {
-            this.$router.push('/eventdetail')
+        
+        goto(get) {
+            //this.$router.push('/eventdetail')
+            console.log(get['.key'])
         },
         
     }

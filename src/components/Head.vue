@@ -38,14 +38,7 @@
         </v-app-bar-items> 
     </v-app-bar>
     
-    <v-navigation-drawer
-      app
-      v-model="drawer"
-      clipped
-      fixed
-      
-      disable-resize-watcher
-      >
+    <v-navigation-drawer app v-model="drawer" clipped fixed disable-resize-watcher>
       <v-list-item>
           <v-list-item-avatar>
           <v-img src="../assets/logo.svg" alt="user"></v-img>
@@ -59,12 +52,7 @@
       <v-divider></v-divider>
 
       <v-list >
-        <v-list-item
-        v-for="item in items"
-        :key="item.title"
-        link
-        router :to="item.route"
-        >
+        <v-list-item v-for="item in items" :key="item.title" link router :to="item.route">
         <v-list-item-icon>
             <v-icon >{{ item.icon }}</v-icon>
         </v-list-item-icon>

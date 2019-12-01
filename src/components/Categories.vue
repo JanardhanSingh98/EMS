@@ -6,25 +6,24 @@
             </v-content>
         </div>
 
-        <v-container>
+        <v-container fluid>
             <v-layout row wrap>
-                <v-flex xs12 sm12>
-                    <v-row class="text-center ma-2">
-                        <v-content 
-                        v-for="(button, i) in buttons"
-                        :key="i"
-                        class="pa-2"
-                        >
-                            <v-hover v-slot:default="{ hover }" >                        
-                                <v-col class="">
-                                    <v-btn :elevation="hover ? 20 : 4" @click="redirect" height="90" width="90" rounded >
-                                        <v-img height="60px" width="60px" :src="button.img"></v-img> 
-                                    </v-btn>
-                                    <br>
-                                    <span class="">{{button.name}}</span>
-                                </v-col>
-                            </v-hover>
-                        </v-content>
+                <v-flex xs12 sm12 >
+                    <v-row class="text-center ">
+                        <v-col v-for="(button, i) in buttons" :key="i"   md="" sm="3" xs="4" > 
+                            <v-content class="pa-2">
+                                <v-hover v-slot:default="{ hover }" >                        
+                                    <v-col class="">
+                                        <v-btn :elevation="hover ? 20 : 4" @click="redirect" height="90" width="90" rounded >
+                                            <v-img height="60px" width="60px" :src="button.img"></v-img> 
+                                        </v-btn>
+                                        <br>
+                                        <br>
+                                        <span class="">{{button.name}}</span>
+                                    </v-col>
+                                </v-hover>
+                            </v-content>
+                        </v-col>
                     </v-row>
                 </v-flex>
             </v-layout>
