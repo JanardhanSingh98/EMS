@@ -8,36 +8,17 @@
 
         <v-spacer></v-spacer>
         
-        <v-app-bar-items class="d-none d-sm-flex">
-          <!--<v-btn 
-          text v-for="(navItem, i) in navItems" 
-          :key="i"
-          :to="navItem.route"
-          class="ma-1 "
-          color="black"
-          >{{ navItem.text }}</v-btn>-->
-
+        <v-app-bar-items class="d-none d-sm-flex my-auto">
           <v-btn :elevation="0" to="/" class="ma-1">Home</v-btn>
-        
-      
           <v-btn :elevation="0" to="/allevents" class="ma-1">ALL Events</v-btn>
-        
-      
           <v-btn :elevation="0" to="/addevent" class="ma-1">Host Event</v-btn>
-        
-      
           <v-btn :elevation="0" to="/organisers" class="ma-1">organisers</v-btn>
-        
-      
-          <v-btn :elevation="0" v-if="user == null" to="/signin" class="ma-1">Login</v-btn>
-
-
-          <v-btn :elevation="0" v-else @click="logout" class="ma-1">Logout</v-btn>
-            
-            
+          <v-btn :elevation="0" v-if="lshow === ''" to="/signin" class="ma-1">Login</v-btn>
+          <v-btn :elevation="0" v-else to="/userprofile" class="ma-1">
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
         </v-app-bar-items> 
     </v-app-bar>
-    
     <v-navigation-drawer app v-model="drawer" clipped fixed disable-resize-watcher>
       <v-list-item>
           <v-list-item-avatar>
@@ -72,14 +53,7 @@ import {fb} from '@/firebase'
 export default {
   name: 'head',
   data: () => ({
-    user: null,
-    /*navItems: [
-      { text: 'Home', route: '/' },
-      { text: 'All Events', route: '/allevents'},
-      { text: 'Add Event', route: '/addevent'},
-      { text: 'Organisers', route: '/organisers'},
-      { text: 'SignIn', route: '/signin'},
-    ],*/
+    lshow: '',
     drawer: false,
     items: [
       { icon: 'fa-home', title: 'Home',  route: '/' },
@@ -90,19 +64,18 @@ export default {
       { icon: 'fa-sign-in', title: 'SignIn', route: '/signin' },
     ],
   }),
-  created(){
-    this.user=fb.auth().currentUser
+  created() {
+    this.user = fb.auth().currentUser
+    fb.auth().onAuthStateChanged( (user) => {
+      if (user) {
+        console.log(user)
+        this.lshow = user
+      } else {
+        console.log('error hai')
+        this.lshow = '';
+      }
+    });
   },
-  methods: 
-    {
-      logout(){
-        fb.auth().signOut()
-        .then(()=>{
-          console.log("logout")
-          this.$router.replace('/signin');
-        })
-      },
-    },
 }
 </script>
 

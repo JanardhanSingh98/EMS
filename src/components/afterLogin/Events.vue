@@ -16,123 +16,123 @@
                 <span class="font-weight-bold display-2 ma-4">Create Event</span><br><br><br>
                 
                 <v-container >
-                  <v-form ref="addevent"> 
-                  <span class="font-weight-medium ">Basic Details</span>
-                  <v-divider ></v-divider><br>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="6">
-                      <v-text-field outlined v-model="event.ename" required label="Event name"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-select :items="keys" v-model="event.ecato" label="Event Category" outlined></v-select>
-                    </v-col>
-                  </v-row>
+                  <v-form ref="addevent" v-model="eventform"> 
+                    <span class="font-weight-medium ">Basic Details</span>
+                    <v-divider ></v-divider><br>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="6">
+                        <v-text-field outlined v-model="event.ename" :rules="nameRules" label="Event name"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-select :items="keys" v-model="event.ecato" :rules="catoRules" label="Event Category" outlined></v-select>
+                      </v-col>
+                    </v-row>
 
-                  <!--<v-row>
-                    <v-col>
-                      <v-file-input
-                        v-model="files"
-                        color="primary accent-4"
-                        counter
-                        label="File input"
-                        
-                        placeholder="Select your files"
-                        append-icon="mdi-camera"
-                        append-outer-icon
-                        outlined
-                        :show-size="1000"
-                      >
-                        <template v-slot:selection="{ index, text }">
-                          <v-chip
-                            v-if="index < 2"
-                            color="primary accent-4"
-                            dark
-                            label
-                            small
-                          >
-                            {{ text }}
-                          </v-chip>
+                    <!--<v-row>
+                      <v-col>
+                        <v-file-input
+                          v-model="files"
+                          color="primary accent-4"
+                          counter
+                          label="File input"
+                          
+                          placeholder="Select your files"
+                          append-icon="mdi-camera"
+                          append-outer-icon
+                          outlined
+                          :show-size="1000"
+                        >
+                          <template v-slot:selection="{ index, text }">
+                            <v-chip
+                              v-if="index < 2"
+                              color="primary accent-4"
+                              dark
+                              label
+                              small
+                            >
+                              {{ text }}
+                            </v-chip>
 
-                          <span
-                            v-else-if="index === 2"
-                            class="overline primary--text text--darken-3 mx-2"
-                          >
-                            +{{ files.length - 2 }} File(s)
-                          </span>
-                        </template>
-                      </v-file-input>
-                    </v-col>
-                  </v-row>-->
-                  
-                  <!--Date picker -->
+                            <span
+                              v-else-if="index === 2"
+                              class="overline primary--text text--darken-3 mx-2"
+                            >
+                              +{{ files.length - 2 }} File(s)
+                            </span>
+                          </template>
+                        </v-file-input>
+                      </v-col>
+                    </v-row>-->
+                    
+                    <!--Date picker -->
 
-                  <span class="font-weight-medium ">Date(s)</span>
-                  <v-divider ></v-divider><br>
-                  <v-row>
-                    <v-col>
-                      <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition"                       offset-y
-                        full-width max-width="290px" min-width="290px">
-                        <template v-slot:activator="{ on }">
-                          <v-text-field v-model="event.date1" label="Start Date" hint="MMM-DD-YYYY format" clearable persistent-hint append-icon="event"
-                          readonly outlined v-on="on"></v-text-field>
-                        </template>
-                        <v-date-picker :disable-dates="allowedDates" v-model="event.date1" @input="menu1 = false"></v-date-picker>
-                      </v-menu>
-                    </v-col>
+                    <span class="font-weight-medium ">Date(s)</span>
+                    <v-divider ></v-divider><br>
+                    <v-row>
+                      <v-col>
+                        <v-menu v-model="menu1" :close-on-content-click="false" transition="scale-transition"                       offset-y
+                          full-width max-width="290px" min-width="290px">
+                          <template v-slot:activator="{ on }">
+                            <v-text-field :rules="dateRules" v-model="event.date1" label="Start Date" hint="MMM-DD-YYYY format" clearable persistent-hint append-icon="event"
+                            readonly outlined v-on="on"></v-text-field>
+                          </template>
+                          <v-date-picker :disable-dates="allowedDates" v-model="event.date1" @input="menu1 = false"></v-date-picker>
+                        </v-menu>
+                      </v-col>
 
-                    <v-col>
-                      <v-menu v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y full-width max-width="290px"
-                        min-width="290px">
-                        <template v-slot:activator="{ on }">
-                          <v-text-field v-model="event.date2" label="End Date" hint="MMM-DD-YYYY format" clearable persistent-hint append-icon="event"
-                          readonly outlined v-on="on"></v-text-field>
-                        </template>
-                        <v-date-picker v-model="event.date2" @input="menu2 = false"></v-date-picker>
-                      </v-menu>
-                    </v-col>
-                  </v-row><br>
+                      <v-col>
+                        <v-menu v-model="menu2" :close-on-content-click="false" transition="scale-transition" offset-y full-width max-width="290px"
+                          min-width="290px">
+                          <template v-slot:activator="{ on }">
+                            <v-text-field :rules="dateRules" v-model="event.date2" label="End Date" hint="MMM-DD-YYYY format" clearable persistent-hint append-icon="event"
+                            readonly outlined v-on="on"></v-text-field>
+                          </template>
+                          <v-date-picker v-model="event.date2" @input="menu2 = false"></v-date-picker>
+                        </v-menu>
+                      </v-col>
+                    </v-row><br>
 
 
-                  <span class="font-weight-medium ">Event Description</span>
-                  <v-divider ></v-divider><br>
-                  <v-row>
-                    <v-col>
-                      <!--<v-textarea v-model="event.editorData" label="Event Description" outlined></v-textarea>-->
+                    <span class="font-weight-medium ">Event Description</span>
+                    <v-divider ></v-divider><br>
+                    <v-row>
+                      <v-col>
+                        <v-textarea :rules="descRules" v-model="event.editorData" label="Event Description" outlined></v-textarea>
 
-                      <ckeditor :editor="editor" v-model="event.editorData" :config="editorConfig"></ckeditor>            
-                    </v-col>
-                  </v-row><br>
+                        <!--<ckeditor :editor="editor" :rules="descRules" v-model="event.editorData" :config="editorConfig"></ckeditor>-->            
+                      </v-col>
+                    </v-row><br>
 
-                  <span class="font-weight-medium ">Organiser details</span>
-                  <v-divider ></v-divider><br>
-                  <v-row>
-                    <v-col>
-                      <v-text-field outlined v-model="event.oname" label="Organiser name"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field outlined v-model="event.ophone" type="number" label="Phone number"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field outlined v-model="event.oemail" type="email" label="email"></v-text-field>
-                    </v-col>
-                  </v-row><br>
+                    <span class="font-weight-medium ">Organiser details</span>
+                    <v-divider ></v-divider><br>
+                    <v-row>
+                      <v-col>
+                        <v-text-field outlined :rules="nameRules" v-model="event.oname" label="Organiser name"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field outlined v-model="event.ophone" type="number" label="Phone number"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field outlined :rules="emailRules" v-model="event.oemail" type="email" label="email"></v-text-field>
+                      </v-col>
+                    </v-row><br>
 
-                  <span class="font-weight-medium ">Venue</span>
-                  <v-divider ></v-divider><br>
-                  <v-row>
-                    <v-col>
-                      <v-text-field v-model="event.adress" outlined label="Address"></v-text-field>
-                    </v-col>
-                  </v-row>
+                    <span class="font-weight-medium ">Venue</span>
+                    <v-divider ></v-divider><br>
+                    <v-row>
+                      <v-col>
+                        <v-text-field :rules="adrRules" v-model="event.adress" outlined label="Address"></v-text-field>
+                      </v-col>
+                    </v-row>
 
-                  <v-btn class="ma-2" :loading="loading4" :disabled="loading4" color="info" @click="submit">
-                    Submit
-                    <template v-slot:loader>
-                      <span class="custom-loader">
-                        <v-icon light>cached</v-icon>
-                      </span>
-                    </template>
-                  </v-btn>
+                    <v-btn class="ma-2" :loading="loading4" :disabled="!eventform" color="info" @click="submit">
+                      Submit
+                      <template v-slot:loader>
+                        <span class="custom-loader">
+                          <v-icon light>cached</v-icon>
+                        </span>
+                      </template>
+                    </v-btn>
 
                   </v-form>
                 </v-container>
@@ -227,25 +227,18 @@
 
 
     </v-tabs>   
-
-
-      <v-snackbar v-model="snackbar" top>
-        {{ text }}
-        <v-btn color="pink" text @click="snackbar = false">
-          Close
-        </v-btn>
-      </v-snackbar> 
-
-
   </v-card>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import { db } from '@/firebase'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import { copySync } from 'fs-extra';
 
   export default {
     data: () => ({
+      eventform: true,
       allowedDates: {to: new Date(Date.now() - 2)},
       a: 'home',  //event.ecato.toLowerCase().trim()
       currentDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
@@ -264,8 +257,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
         add_date: new Date(),
         edit_date: new Date(),
       },
-      snackbar: false,
-      text: 'Event added successfully!',
 
       //date: new Date().toISOString().substr(0, 10),
       clicked: false,
@@ -291,6 +282,32 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
       },
       loader: null,
       loading4: false,
+
+      //validation
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+      ],
+      catoRules: [
+        v => !!v || 'Category is required',
+      ],
+      dateRules: [
+        v => !!v || 'Date is required',
+      ],
+      descRules: [
+        v => !!v || 'Description is required',
+        v => (v && v.length <= 50) || 'Description must be less than 50 characters',
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
+      adrRules: [
+        v => !!v || 'Adress is required',
+      ],
+
+
+
     }),
     firestore() {
       return{
@@ -308,23 +325,20 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
       },
       submit () {
         this.loading4 = true;
-        //console.log(this.sent);
-
         this.$firestore.events.add(this.event).then( () => {
-          this.loading4 = false
-          this.snackbar = true
-          console.log('data added successfully')
-          this.$refs.addevent.reset()
-          this.sent.editorData = ''
+          //console.log('added');
+          Swal.fire(
+            'Event added successfully!',
+            'Please wait for approval',
+            'success'
+          )
+          this.loading4 = false;
+          this.$refs.addevent.reset();
+          this.sent.editorData = '';
         }).catch( () => {
           console.log('something went wrong')
         })
-
-        //this.$router.push('/allevents')
       },
-      //allowedDates: val => new Date(Date.now() - 8640000)
-          //to= new Date(Date.now() - 8640000)
-          
     }
   }
 </script>

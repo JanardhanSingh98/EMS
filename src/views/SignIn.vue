@@ -49,9 +49,8 @@ export default {
       .then(() => {
         console.log("logedin")
         console.log(fb.auth().currentUser.email)
-        this.$router.push('/')
+        this.$router.push('/userprofile')
       })
-      
       this.loading = true;
       setTimeout(() => {
         this.loading = false;
