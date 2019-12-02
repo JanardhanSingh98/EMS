@@ -6,6 +6,7 @@
       color="basil"
       left
     >
+    <!--CREATE EVENT-->
       <v-tab>Create Event</v-tab>
         <v-tab-item>
           <v-container>
@@ -75,7 +76,7 @@
                           <v-text-field v-model="event.date1" label="Start Date" hint="MMM-DD-YYYY format" clearable persistent-hint append-icon="event"
                           readonly outlined v-on="on"></v-text-field>
                         </template>
-                        <v-date-picker v-model="event.date1" @input="menu1 = false"></v-date-picker>
+                        <v-date-picker :disable-dates="allowedDates" v-model="event.date1" @input="menu1 = false"></v-date-picker>
                       </v-menu>
                     </v-col>
 
@@ -96,10 +97,9 @@
                   <v-divider ></v-divider><br>
                   <v-row>
                     <v-col>
-                      <v-textarea v-model="event.editorData" label="Event Description" outlined></v-textarea>
+                      <!--<v-textarea v-model="event.editorData" label="Event Description" outlined></v-textarea>-->
 
-                      <!--<ckeditor :editor="editor" v-model="sent.editorData" :config="editorConfig"></ckeditor>-->
-                 
+                      <ckeditor :editor="editor" v-model="event.editorData" :config="editorConfig"></ckeditor>            
                     </v-col>
                   </v-row><br>
 
@@ -140,8 +140,8 @@
             </v-layout>
           </v-container>
         </v-tab-item>
-      
 
+    <!--DRAFT EVENT--> 
       <v-tab>Draft Event</v-tab>
       <v-tab-item >
         <v-container class="grey lighten-2 ma-0 pa-0 mx-auto mt-1" v-for="(event, i) in events" :key="i">
@@ -157,9 +157,9 @@
             <v-col sm="3" md="3" xs="3" style="border-left: 2px solid red;">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="text-center"><v-chip  class="red my-1" small>ongoing</v-chip></v-list-item-title>
+                  <v-list-item-title class=""><v-chip  class="success my-1" small>ongoing</v-chip></v-list-item-title>
                   <v-list-item-subtitle class="text-left">
-                    <v-chip  class="success my-1"><v-icon left color="red">mdi-account</v-icon>{{event.ecato}}</v-chip>
+                    <v-chip  class="primary my-1"><v-icon left color="white">mdi-account</v-icon>{{event.ecato}}</v-chip><br>
                     <v-btn flat outlined v-bind:to="'/eventdetail/'+event['.key']">explore</v-btn>
                   </v-list-item-subtitle>
                 </v-list-item-content>
@@ -169,9 +169,9 @@
         </v-container>
       </v-tab-item>
     
+    <!--LIVE EVENT-->
       <v-tab>Live Event</v-tab>
       <v-tab-item>
-        
         <v-container class="grey lighten-2 ma-0 pa-0 mx-auto mt-1" v-for="(event, i) in events" :key="i">
           <v-row no-gutters v-if="event.date1 === currentDate">
             <v-col cols="12" sm="9" md="9" xs="12">
@@ -185,9 +185,9 @@
             <v-col sm="3" md="3" xs="3" style="border-left: 2px solid red;">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="text-center"><v-chip  class="success my-1" small>ongoing</v-chip></v-list-item-title>
+                  <v-list-item-title class=""><v-chip  class="success my-1" small>ongoing</v-chip></v-list-item-title>
                   <v-list-item-subtitle class="text-left">
-                    <v-chip  class="success my-1"><v-icon left color="red">mdi-account</v-icon>{{event.ecato}}</v-chip>
+                    <v-chip  class="primary my-1"><v-icon left color="white">mdi-account</v-icon>{{event.ecato}}</v-chip><br>
                     <v-btn flat outlined v-bind:to="'/eventdetail/'+event['.key']">explore</v-btn>
                   </v-list-item-subtitle>
                 </v-list-item-content>
@@ -195,9 +195,9 @@
             </v-col>
           </v-row>
         </v-container>
-
       </v-tab-item>
 
+    <!--UPCOMING EVENT-->
       <v-tab>Upcoming Events</v-tab>
       <v-tab-item>
         <v-container class="grey lighten-2 ma-0 pa-0 mx-auto mt-1" v-for="(event, i) in events" :key="i">
@@ -213,9 +213,9 @@
             <v-col sm="3" md="3" xs="3" style="border-left: 2px solid red;">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title class="text-center"><v-chip  class="yellow my-1" small>ongoing</v-chip></v-list-item-title>
+                  <v-list-item-title class=""><v-chip  class="success my-1" small>ongoing</v-chip></v-list-item-title>
                   <v-list-item-subtitle class="text-left">
-                    <v-chip  class="success my-1"><v-icon left color="red">mdi-{{a}}</v-icon>{{event.ecato}}</v-chip>
+                    <v-chip  class="primary my-1"><v-icon left color="white">mdi-{{a}}</v-icon>{{event.ecato}}</v-chip><br>
                     <v-btn flat outlined v-bind:to="'/eventdetail/'+event['.key']">explore</v-btn>
                   </v-list-item-subtitle>
                 </v-list-item-content>
@@ -229,12 +229,12 @@
     </v-tabs>   
 
 
-    <v-snackbar v-model="snackbar" top>
-      {{ text }}
-      <v-btn color="pink" text @click="snackbar = false">
-        Close
-      </v-btn>
-    </v-snackbar> 
+      <v-snackbar v-model="snackbar" top>
+        {{ text }}
+        <v-btn color="pink" text @click="snackbar = false">
+          Close
+        </v-btn>
+      </v-snackbar> 
 
 
   </v-card>
@@ -246,6 +246,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
   export default {
     data: () => ({
+      allowedDates: {to: new Date(Date.now() - 2)},
       a: 'home',  //event.ecato.toLowerCase().trim()
       currentDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
       events: [],
@@ -320,7 +321,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
         })
 
         //this.$router.push('/allevents')
-      }
+      },
+      //allowedDates: val => new Date(Date.now() - 8640000)
+          //to= new Date(Date.now() - 8640000)
+          
     }
   }
 </script>

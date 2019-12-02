@@ -8,7 +8,7 @@
 
 <template>
   <div>
-    <v-simple-table>
+    <v-simple-table v-show="admindata">
       <template v-slot:default>
         <thead>
             <tr>
@@ -29,39 +29,53 @@
               <td>{{ event.oname }}</td>
               <td>{{ event.ophone }}</td>
               <td><v-chip :class="`${event.status} white--text`">{{ event.status }}</v-chip></td>
-              <td><v-btn text outlined v-bind:disabled="event.status === true" @click="approve(event)">Approve</v-btn></td>
+              <td>
+                <v-btn text outlined v-bind:disabled="event.status === true" @click="approve(event)">Approve</v-btn>
+                <v-btn text outlined v-bind:disabled="event.status === false" @click="disapprove(event)">dispprove</v-btn>
+                <v-btn icon outlined v-bind:disabled="event.status === true" @click="deleteevent(event)" class="mr-2">
+                  <v-icon color='warning'>mdi-delete</v-icon>
+                </v-btn>
+              </td>
             </tr>
         </tbody>
       </template>
     </v-simple-table>
-    <v-snackbar v-model="snackbar" :timeout="timeout" top>
-      {{ text }}
-      <v-btn color="white" text @click="snackbar = false" icon>X</v-btn>
-    </v-snackbar>
+
+
+    <v-dialog max-width="500" class="mx-auto grey text-center" v-model="adminForm">
+        <div class="form">
+          <md-field>
+            <label>Admin Email</label>
+            <md-input v-model="adminemail" autofocus></md-input>
+          </md-field>
+
+          <md-field md-has-password>
+            <label>Admin Password</label>
+            <md-input v-model="adminpassword" type="password"></md-input>
+          </md-field>
+        </div>
+
+        <div class="actions md-layout md-alignment-center-space-between">
+          <!--<a>Reset password</a>-->
+          <md-button class="md-raised md-primary" @click="adminlogin">Log in</md-button>
+        </div>
+    </v-dialog>
+
+    <!--<v-btn @click="getadmin">user</v-btn>-->
+
+    <div justify="center" align="center" class="my-2">
+      <v-btn @click="log" v-if="admin !== ''" width="250" color="primary">logout</v-btn>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { db } from '@/firebase'
+import { db, fb } from '@/firebase'
+import Swal from 'sweetalert2'
   export default {
     data () {
       return {
-        snackbar: false,
-        timeout: null,
-        text: '',
-        /*headers: [
-          {
-            text: 'Name',
-            align: 'left',
-            //sortable: false,
-            value: 'ename',
-          },
-          { text: 'Category', value: 'ecato' },
-          { text: 'Date', value: 'date1' },
-          { text: 'Club', value: 'oname' },
-          { text: 'Phone', value: 'ophone' },
-          { text: 'Status', value: 'status' },
-        ],*/
 
         events: [],
         event: {
@@ -78,6 +92,12 @@ import { db } from '@/firebase'
           add_date: null,
           edit_date: null,
         },
+
+        admindata: false,
+        adminForm: false,
+        adminemail: '',
+        adminpassword: '',
+        admin: '',
       }
     },
     firestore() {
@@ -85,6 +105,21 @@ import { db } from '@/firebase'
         events: db.collection('events')
       }
     },
+
+    created: function() {
+      this.admin = fb.auth().currentUser;
+      fb.auth().onAuthStateChanged( (user) => {
+        if (user) {
+          console.log(user)
+          this.admindata = true;
+        } else {
+          console.log('error hai')
+          this.admin = '';
+          this.adminForm = true;
+        }
+      });
+    },
+
     methods: {
       getdate() {
         var d = new Date();
@@ -93,14 +128,92 @@ import { db } from '@/firebase'
         console.log(currentDateWithFormat);
       },
       approve(event) {
-        this.$firestore.events.doc(event['.key']).update({ status: true })
-        .then( () => {
-          this.snackbar = true
-          this.timeout = 3000
-          this.text = 'Event approved'
-          console.log(this.text)
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Following event will be approved!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, approve it!'
+        }).then((result) => {
+          if (result.value) {
+            this.$firestore.events.doc(event['.key']).update({ status: true });
+            Swal.fire(
+              'Approved!',
+              'Following event has been approved.',
+              'success'
+            )
+          }
+        })
+      },
+      disapprove(event) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Following event will be dis-approved!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, dis-approve it!'
+        }).then((result) => {
+          if (result.value) {
+            this.$firestore.events.doc(event['.key']).update({ status: false });
+            Swal.fire(
+              'Dis-approved!',
+              'Following event has been dis-approved.',
+              'success'
+            )
+          }
+        })
+      },
+      deleteevent(event) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            this.$firestore.events.doc(event['.key']).delete()
+            Swal.fire(
+              'Deleted!',
+              'Your event has been deleted.',
+              'success'
+            )
+          }
+        })
+      },
+      adminlogin() {
+        fb.auth().signInWithEmailAndPassword(this.adminemail, this.adminpassword).then( (user)=> {
+          this.adminForm = false;
+          this.admindata = true;
+          this.admin = user;
+          console.log(user);
+          
+        })
+      },
+      log() {
+        fb.auth().signOut().then( () => {
+          this.admindata = false;
+          this.adminlogin = true;
+          this.admin = '';
+          console.log('logged out');
         })
       }
+
+      /*getadmin() {
+        console.log(fb.auth().currentUser);
+        if(fb.auth().currentUser) {
+          console.log('logged in');
+          console.log(fb.auth().currentUser.email);
+        } else {
+          console.log('pleae login')
+        }
+      },*/
     }
   }
 </script>

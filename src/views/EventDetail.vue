@@ -3,22 +3,11 @@
       <v-container >
         <v-layout row wrap>
           <v-flex xs12>
-            <v-carousel
-            hide-delimiter-background
-            show-arrows-on-hover
-            delimiter-icon="mdi-minus"
-            height="400"
-            >
-              <v-carousel-item
-                v-for="(item, id) in items"
-                :key="id"
-                :src="item.content"
-                reverse-transition="slide-x-reverse-transition"
-                transition="slide-x-transition"
-              >
-              
-              </v-carousel-item>
-            </v-carousel>
+                
+            <v-img max-height="400" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/12/16131147/future-phone-mobile-live-events-technology-trends.png" >
+
+            </v-img>
+            
           </v-flex>
         </v-layout>
       </v-container>
@@ -78,10 +67,13 @@
                       </v-tab>
                       <v-tab-item>
                         <br>
-                        <v-container background-color="transparent" color="blue">
+                        <div>
+                        <ckeditor :editor="editor" :disabled="editorDisabled" v-model="get.editorData"></ckeditor>
+
+                        </div>
+                        <!--<v-container background-color="transparent" color="blue">
                          {{get.editorData}}
-                      
-                        </v-container>
+                        </v-container>-->
                       </v-tab-item>
 
                       <v-tab>
@@ -105,7 +97,7 @@
 
                 <v-col cols="12" sm="12" md="" lg="3">
                   <div class="text-center"  >
-                    <v-btn width="800" rounded color="primary" v-bind:disabled="get.date1 <= currentDate">Register</v-btn>
+                    <v-btn width="800" rounded color="primary"  v-bind:disabled="get.date1 <= currentDate">Register</v-btn>
                   </div><br>
                   <div class="text-center" elevation>
                     <span class="font-weight-bold title ">Organiser Contact</span>
@@ -169,7 +161,8 @@
 
 
 <script>
-import { db } from '@/firebase'
+import { db,fb } from '@/firebase'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export default {
   data: () => ({
     currentDate : new Date().toJSON().slice(0,10).replace(/-/g,'-'),
@@ -186,9 +179,14 @@ export default {
       adress: null,
       add_date: null,
       edit_date: null,
+      
     },
+    editor: ClassicEditor,
+    editorDisabled: true,
+    
   }),
   created() {
+    fb.auth().currentUser
     this.id = this.$route.params.id;
     db.collection('events').doc(this.id).get().then( (doc) => {
       this.get = doc.data();

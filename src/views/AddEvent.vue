@@ -20,6 +20,7 @@
           color="blue darken-2"
           dark
           fab
+          active
         >
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-icon v-else>mdi-pencil</v-icon>

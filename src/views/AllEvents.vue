@@ -83,7 +83,6 @@
                                     </template>
                                     <v-date-picker v-model="filterDate" @change="menu1 = false"></v-date-picker>
                                     </v-menu>
-                                    <v-btn text outlined>search</v-btn>
                             </v-col>
                             <v-spacer></v-spacer>
                             <v-col cols="4" lg="2">
@@ -103,8 +102,9 @@
         <v-container>
             <v-layout row wrap>
                 <v-flex xs="12" sm="12">
-                    <v-row class="justify-center ma-2" >
-                        <v-content v-for="(get, i) in gets" v-bind:key="i" class="pa-2">
+                    <v-row class="ma-2" >
+                        <v-col v-for="(get, i) in gets" v-bind:key="i" cols="12" md="4" sm="6" xs="12">
+                            <v-content  class="pa-2">
                             <v-hover v-slot:default="{ hover }">
                                 <v-card class="ma-auto" max-width="350" :elevation="hover ? 24 : 4">
                                     <v-img class="white--text" max-height="200px" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/12/16131147/future-phone-mobile-live-events-technology-trends.png">
@@ -133,6 +133,7 @@
                                 </v-card>
                             </v-hover>
                         </v-content>
+                        </v-col>
                     </v-row>
                 </v-flex>
             </v-layout>

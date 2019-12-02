@@ -9,9 +9,9 @@
         height="400"
         >
           <v-carousel-item
-            v-for="(item, id) in items"
+            v-for="(i, id) in items"
             :key="id"
-            :src="item.content"
+            :src="i.content"
             reverse-transition="slide-x-reverse-transition"
             transition="slide-x-transition"
           >
