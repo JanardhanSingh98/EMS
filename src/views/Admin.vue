@@ -1,10 +1,4 @@
-<!--<template>
-  <div>
-    <v-data-table :headers="headers" :items="events" :items-per-page="10" class="elevation-1"></v-data-table>
 
-    <v-btn class="primary" @click="getdate">date</v-btn>
-  </div>
-</template>-->
 
 <template>
   <div>
@@ -42,10 +36,10 @@
     </v-simple-table>
 
 
-    <v-dialog max-width="500" class="mx-auto grey text-center" v-model="adminForm">
+    <v-dialog hide-overlay max-width="500" class="mx-auto grey text-center" v-model="adminForm">
         <div class="form">
-          <md-field>
-            <label>Admin Email</label>
+          <md-field >
+            <label >Admin Email</label>
             <md-input v-model="adminemail" autofocus></md-input>
           </md-field>
 
