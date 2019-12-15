@@ -4,12 +4,12 @@ A Event Management System for managing events happening around us. Best suitable
 <img src="./src/assets/home.png">
 
 # Built With
-<a href="https://vuejs.org/"><img src="./public/img/icons/favicon-32x32.png" title="Vuejs" alt="image"></a> <a href="_https://firebase.google.com/"><img src="./public/firebase32x32.ico" title="Vuejs" alt="image"></a> 
+<a href="https://vuejs.org/"><img src="./public/img/icons/favicon-32x32.png" title="Vuejs" alt="image" target="_blank"></a> <a href="https://firebase.google.com/" target="_blank"><img src="./public/firebase32x32.ico" title="Vuejs" alt="image"></a> 
 
 
 >Before running this you have to build node modules. 
 
->For node modules install <a href="https://www.npmjs.com/package/npm-check" >npm-check</a>
+>For node modules install <a href="https://www.npmjs.com/package/npm-check" target="_blank" >npm-check</a>
 
 after that
 
