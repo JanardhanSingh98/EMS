@@ -44,7 +44,6 @@ export default {
   }),
   methods: {
     submitlogin() {
-      
       fb.auth().signInWithEmailAndPassword(this.username, this.password)
       .then(() => {
         console.log("logedin")

@@ -1,6 +1,6 @@
 <template>
     <div class="allevents ">
-
+        <!--Search bar-->
         <v-container>
             <v-layout row wrap>
                 <v-flex xs12 sm12>
@@ -12,6 +12,7 @@
             </v-layout>
         </v-container>
 
+        <!--Button top-->
         <div class="ma-2">
             <v-row class="text-center ma-3">
                 <v-content class="d-flex pa-2 text-center">
@@ -46,6 +47,7 @@
             </v-row>
         </div>
 
+        <!--Button top2-->
         <v-container>
             <v-layout row wrap>
                 <v-flex xs12 sm12>
@@ -71,6 +73,7 @@
             </v-layout>
         </v-container>
 
+        <!--Filter b date and sorting-->
         <v-container>
             <v-layout row wrap>
                 <v-flex xs12 sm12>
@@ -99,6 +102,7 @@
             </v-layout>
         </v-container>
 
+        <!--Events-->
         <v-container>
             <v-layout row wrap>
                 <v-flex xs="12" sm="12">

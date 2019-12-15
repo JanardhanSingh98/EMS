@@ -24,7 +24,6 @@
           <v-list-item-avatar>
           <v-img src="../assets/logo.svg" alt="user"></v-img>
           </v-list-item-avatar>
-
           <v-list-item-content>
           <v-list-item-title >Janardhan Singh</v-list-item-title>
           </v-list-item-content>
@@ -71,7 +70,7 @@ export default {
         console.log(user)
         this.lshow = user
       } else {
-        console.log('error hai')
+        console.log('Done')
         this.lshow = '';
       }
     });
