@@ -7,11 +7,11 @@
     <v-speed-dial
       v-model="fab"
       fab
+      :value=activeBtn
       bottom
       right
       absolute
       :direction="direction"
-      open-on-hover
       :transition="transition"
     >
       <template v-slot:activator>
@@ -20,7 +20,7 @@
           color="blue darken-2"
           dark
           fab
-          active
+          
         >
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-icon v-else>mdi-pencil</v-icon>
@@ -43,12 +43,12 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
       <v-btn
+        
         fab
         dark
         small
         color="red"
         @click="goto"
-        active
       >
         <v-icon>mdi-home-city</v-icon>
       </v-btn>
@@ -61,6 +61,7 @@ export default {
   name: 'addevent',
   components: {},
   data: () => ({
+    activeBtn: 0,
     direction: 'top',
     fab: false,
     fling: false,
@@ -79,7 +80,6 @@ export default {
   },
   
   watch: {
-      
       right (val) {
         this.left = !val
       },
@@ -94,7 +94,7 @@ export default {
 <style scoped>
   /* This is for documentation purposes and will not be needed in your application */
   #create .v-speed-dial {
-    position: absolute;
+    position: fixed;
   }
 
   #create .v-btn--floating {

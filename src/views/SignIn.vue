@@ -1,34 +1,34 @@
 <template>
     <div class="centered-container">
-    <md-content class="md-elevation-3">
+      <md-content class="md-elevation-3">
 
-      <div class="title">
-        <img src="https://vuematerial.io/assets/logo-color.png">
-        <div class="md-title">Login</div>
-      </div>
+        <div class="title">
+          <img src="https://vuematerial.io/assets/logo-color.png">
+          <div class="md-title">Login</div>
+        </div>
 
-      <div class="form">
-        <md-field>
-          <label>Username</label>
-          <md-input v-model="username" autofocus></md-input>
-        </md-field>
+        <div class="form">
+          <md-field>
+            <label>Username</label>
+            <md-input v-model="username" autofocus></md-input>
+          </md-field>
 
-        <md-field md-has-password>
-          <label>Password</label>
-          <md-input v-model="password" type="password"></md-input>
-        </md-field>
-      </div>
+          <md-field md-has-password>
+            <label>Password</label>
+            <md-input v-model="password" type="password"></md-input>
+          </md-field>
+        </div>
 
-      <div class="actions md-layout md-alignment-center-space-between">
-        <md-button to="/admin">Admin</md-button>
-        <md-button class="md-raised md-primary" @click="submitlogin">Log in</md-button>
-      </div>
+        <div class="actions md-layout md-alignment-center-space-between">
+          <md-button to="/admin">Admin</md-button>
+          <md-button class="md-raised md-primary" @click="submitlogin">Log in</md-button>
+        </div>
 
-      <div class="loading-overlay" v-if="loading">
-        <md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
-      </div>
+        <div class="loading-overlay" v-if="loading">
+          <md-progress-spinner md-mode="indeterminate" :md-stroke="2"></md-progress-spinner>
+        </div>
 
-    </md-content>
+      </md-content>
     <div class="background" />
   </div>
 </template>

@@ -45,7 +45,6 @@ export default {
     data: () => ({
         lshow: '',
         activeBtn: 0,
-
     }),
     created() {
     this.user = fb.auth().currentUser
