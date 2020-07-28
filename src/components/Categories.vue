@@ -28,7 +28,6 @@
                 </v-flex>
             </v-layout>
         </v-container>
-
     </v-container>
 </template>
 
@@ -44,8 +43,6 @@ export default {
             {img: require('../assets/logo/gaming.svg'), name: 'Gaming'},
             {img: require('../assets/logo/technical.svg'), name: 'Technical'},
             {img: require('../assets/logo/sports.svg'), name: 'Sports'},
-            
-            
         ]
 
     }),

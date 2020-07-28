@@ -4,8 +4,6 @@
     <Categories/>
     <FeatureEvents/>
   </div>
-  
-  
 </template>
 
 <script>

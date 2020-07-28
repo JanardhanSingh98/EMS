@@ -92,7 +92,7 @@
                                 <v-spacer></v-spacer>
                                 <template >
                                     <v-spacer></v-spacer>
-                                    <v-select v-model="sortBy" clearable flat hide-details :items="keys" prepend-inner-icon="search" label="Sort by"></v-select>
+                                    <v-select clearable flat hide-details :items="keys" prepend-inner-icon="search" label="Sort by"></v-select>
                                     
                                 </template>
                             </v-col>
@@ -109,34 +109,34 @@
                     <v-row class="ma-2" >
                         <v-col v-for="(get, i) in gets" v-bind:key="i" cols="12" md="4" sm="6" xs="12">
                             <v-content  class="pa-2">
-                            <v-hover v-slot:default="{ hover }">
-                                <v-card class="ma-auto" max-width="350" :elevation="hover ? 24 : 4">
-                                    <v-img class="white--text" max-height="200px" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/12/16131147/future-phone-mobile-live-events-technology-trends.png">
-                                        <div align="right">
-                                            <v-chip class="ma-2 text-uppercase font-weight-bold" color="primary" label @click="to">
-                                                {{get.ecato}}
-                                            </v-chip>
-                                        </div>
-                                    </v-img>
+                                <v-hover v-slot:default="{ hover }">
+                                    <v-card class="ma-auto" max-width="350" :elevation="hover ? 24 : 4">
+                                        <v-img class="white--text" max-height="200px" src="https://blogmedia.evbstatic.com/wp-content/uploads/wpmulti/sites/3/2016/12/16131147/future-phone-mobile-live-events-technology-trends.png">
+                                            <div align="right">
+                                                <v-chip class="ma-2 text-uppercase font-weight-bold" color="primary" label @click="to">
+                                                    {{get.ecato}}
+                                                </v-chip>
+                                            </div>
+                                        </v-img>
 
-                                    <v-card-text>
-                                        <span>{{ get.date1 }} - {{ get.date2 }}</span><br>
-                                        <span class="text--primary font-weight-bold font-weight-black" >{{ get.ename }}</span> <br>
-                                        <span class="">
-                                            <span>{{ get.editorData.slice(0, 15) }}</span><br>
-                                            <span>{{ get.adress}}</span>
-                                        </span>
-                                    </v-card-text>
+                                        <v-card-text>
+                                            <span>{{ get.date1 }} - {{ get.date2 }}</span><br>
+                                            <span class="text--primary font-weight-bold font-weight-black" >{{ get.ename }}</span> <br>
+                                            <span class="">
+                                                <span>{{ get.editorData.slice(0, 15) }}</span><br>
+                                                <span>{{ get.adress}}</span>
+                                            </span>
+                                        </v-card-text>
 
-                                    <v-card-actions>
-                                        <v-spacer></v-spacer>
-                                        <v-btn text color="primary" @click="goto(get)"  v-bind:to="'/eventdetail/'+get['.key']">
-                                            Explore
-                                        </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                            </v-hover>
-                        </v-content>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn text color="primary" @click="goto(get)"  v-bind:to="'/eventdetail/'+get['.key']">
+                                                Explore
+                                            </v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-hover>
+                            </v-content>
                         </v-col>
                     </v-row>
                 </v-flex>
@@ -209,11 +209,11 @@ export default {
             });
             console.log(this.gets);
          });*/
-
-
-
         },
-        
+        to() {
+            this.$router.push('/allevents')
+        },
+
         goto(get) {
             //this.$router.push('/eventdetail')
             console.log(get['.key'])

@@ -67,7 +67,7 @@ export default {
     this.user = fb.auth().currentUser
     fb.auth().onAuthStateChanged( (user) => {
       if (user) {
-        console.log(user)
+        //console.log(user)
         this.lshow = user
       } else {
         console.log('Done')
