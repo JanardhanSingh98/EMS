@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import { fb } from '@/firebase'
+
 
 Vue.use(Router)
 
@@ -100,7 +100,7 @@ const routes = [
       {
         path: 'events',
         name: 'events',
-        component: () => import('@/components/afterLogin/Events.vue')
+        component: () => import('./components/addevent/Events.vue')
       }
     ]
   },
@@ -118,12 +118,11 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: () => import('./views/Admin'),
-    //meta: { requiresAuth: true }
   },
   {
     path: '/userprofile',
     name: 'userprofile',
-    component: () => import('@/components/afterLogin/UserProfile'),
+    component: () => import('@/components/UserProfile'),
     meta: { requiresAuth: true }
   }
 ]
@@ -132,20 +131,6 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URl,
   routes
-})
-
-
-router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-  const currentuser = fb.auth().currentUser
-
-  if(requiresAuth && !currentuser){
-    next('/')
-  } else if (requiresAuth && currentuser ) {
-    next()
-  } else {
-    next()
-  }
 })
 
 export default router

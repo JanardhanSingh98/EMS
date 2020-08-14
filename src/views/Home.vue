@@ -1,25 +1,24 @@
 <template>
-  <div >
-    <Carousel/>
-    <Categories/>
-    <FeatureEvents/>
+  <div>
+    <Carousel />
+    <Categories />
+    <FeatureEvents />
   </div>
 </template>
 
 <script>
-import Carousel from '../components/Carousel'
-import Categories from '../components/Categories'
-import FeatureEvents from '../components/FeatureEvents'
+import Carousel from "../components/home/Carousel";
+import Categories from "../components/home/Categories";
+import FeatureEvents from "../components/home/FeatureEvents";
 
 export default {
   components: {
     Carousel,
     Categories,
-    FeatureEvents
+    FeatureEvents,
   },
 };
 </script>
 
 <style  scoped>
-
 </style>

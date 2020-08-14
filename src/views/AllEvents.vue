@@ -283,28 +283,11 @@ export default {
   computed() {},
 
   methods: {
-    game(para) {
-      console.log(para);
-      /*if(para === 'All') {
-            this.gets = db.collection('events').where('status', '==', true).orderBy('date1');
-          }
-
-          db.collection("events").where("ecato", "==", para).onSnapshot( (querySnapshot) => {
-            this.gets = [];
-            querySnapshot.forEach( (doc) => {
-              
-              this.gets.push(doc.data());
-              console.log(doc.data().id+ ' '+doc.data())
-            });
-            console.log(this.gets);
-         });*/
-    },
     to() {
       this.$router.push("/allevents");
     },
 
     goto(get) {
-      //this.$router.push('/eventdetail')
       console.log(get[".key"]);
     },
   },
