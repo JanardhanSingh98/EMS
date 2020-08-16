@@ -9,7 +9,11 @@ A Event Management System for managing events happening around us. Best suitable
 
 >Before running this you have to build node modules. 
 
->For node modules install <a href="https://www.npmjs.com/package/npm-check" target="_blank" >npm-check</a>
+### For node modules use 
+
+```
+npm install
+```
 
 after that
 
